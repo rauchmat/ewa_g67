@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+	<head>
+		<title>poker - Registrieren</title>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Patrick Marschik, Matthias Rauch" />
+		<meta name="description" content="Registrierungsformular für EWA Poker." />
+		<meta name="keywords" content="poker, EWA, registrieren" />
+		<meta name="language" content="DE" />
+		<link rel="stylesheet" type="text/css" href="styles/screen.css" media="screen" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="top">
+				<h1>poker</h1>
+				
+				<p id="userinfo">
+					<a href="#login">Einloggen</a> oder <a href="#register">Registrieren</a>
+				</p>
+			</div>
+		
+			<div id="main">
+				<div id="sidebar">
+					<h2 class="wai-compat">Benutzeraktionen</h2>
+					<ul>
+						<li><a href="#login">Login</a></li>
+						<li><a href="#register">Registrieren</a></li>
+					</ul>
+				</div>
+
+				<div id="content">
+					<h2>Registrieren</h2>
+					<p>Bitte füllen Sie das untenstehende Formular aus!</p>
+					<form method="post" action="#register-form" title="Registrieren">
+						<h3>Persönliche Daten</h3>
+						<p class="formdata">
+							<label for="firstname">Vorname</label>
+							<input type="text" name="firstname" id="firstname" />
+						</p>
+						<p class="formdata">
+							<label for="lastname">Nachname</label>
+							<input type="text" name="lastname" id="lastname" />
+						</p>
+						<p class="formdata">
+							<label for="birthday">Geburtsdatum</label>
+							<input type="text" name="birthday" id="birthday" />
+						</p>
+						<p class="formdata">
+							<label for="sex">Geschlecht</label>
+							<select name="sex" id="sex">
+								<option value="male">männlich</option>
+								<option selected="selected" value="female">weiblich</option>
+							</select>
+						</p>
+						<h3>Login Daten und Größe des Stack</h3>
+						<p class="formdata">
+							<label for="username">Username</label>
+							<input type="text" name="username" id="username" />
+						</p>
+						<p class="formdata">
+							<label for="password">Passwort</label>
+							<input type="text" name="password" id="password" />
+						</p>
+						<p class="formdata">
+							<label for="stacksize">Größe des Stack</label>
+							<input type="text" name="stacksize" id="stacksize" />
+						</p>
+						<p>
+							<input type="submit" name="submit" id="submit" value="Registrieren" />
+						</p>
+					</form>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+		
+			<p id="footer">
+				&copy; 2009 EWA Poker.
+			</p>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+	<head>
+		<title>poker - Spielen</title>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+		<meta name="author" content="Patrick Marschik, Matthias Rauch" />
+		<meta name="description" content="EWA Poker Spielansicht." />
+		<meta name="keywords" content="poker, EWA, spielen" />
+		<meta name="language" content="DE" />
+		<link rel="stylesheet" type="text/css" href="styles/screen.css" media="screen" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="top">
+				<h1 class="wai-compat">poker</h1>
+				
+				<p id="userinfo">
+					Eingeloggt als <em>User Name</em>.
+				</p>
+			</div>
+		
+			<div id="main">
+				<div id="sidebar">
+					<table summary="Informationen über die Chips am Tisch.">
+						<caption>Chips</caption>
+						<col class="sidebar-leftcol" />
+						<col class="sidebar-rightcol" />
+						<tbody>
+							<tr>
+								<th class="wai-compat">Position</th>
+								<th class="wai-compat">Betrag</th>
+							</tr>
+							<tr>
+								<td>Im Pot</td>
+								<td>5 €</td>
+							</tr>
+							<tr>
+								<td>Ante</td>
+								<td>5 €</td>
+							</tr>
+							<tr>
+								<td>Ihr Stack</td>
+								<td>105 €</td>
+							</tr>
+						</tbody>
+					</table>
+					<table summary="Wahrscheinlichkeiten für Kartenkombinationen.">
+						<caption>Wahrscheinlichkeit</caption>
+						<col class="sidebar-leftcol" />
+						<col class="sidebar-rightcol" />
+						<tbody>
+							<tr>
+								<th class="wai-compat">Kombination</th>
+								<th class="wai-compat">Wahrscheinlichkeit</th>
+							</tr>
+							<tr>
+								<td>Gewinn</td>
+								<td>70,033%</td>
+							</tr>
+							<tr>
+								<td>Split</td>
+								<td>43,887%</td>
+							</tr>
+							<tr>
+								<td>Pair</td>
+								<td>10,998%</td>
+							</tr>
+							<tr>
+								<td>Two Pair</td>
+								<td>2,33%</td>
+							</tr>
+							<tr>
+								<td>Three of a Kind</td>
+								<td>0,337%</td>
+							</tr>
+							<tr>
+								<td>Straight</td>
+								<td>20,332%</td>
+							</tr>
+							<tr>
+								<td>Flush</td>
+								<td>12,223%</td>
+							</tr>
+							<tr>
+								<td>Full House</td>
+								<td>0,777%</td>
+							</tr>
+							<tr>
+								<td>Four of a Kind</td>
+								<td>0,301%</td>
+							</tr>
+							<tr>
+								<td>Straight Flush</td>
+								<td>0,033%</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div id="content" class="table">
+					<h2 class="wai-compat">Spieloptionen</h2>
+					<ul id="navigation">
+						<li><a href="#changeuser">Userdaten ändern</a></li>
+						<li><a href="#newgame">Neues Spiel</a></li>
+						<li><a href="#logout">Ausloggen</a></li>
+					</ul>
+					<h2 class="afterNavigation">Karten der Bank</h2>
+					<img class="card" src="img/deck/bg.png" alt="Zugedeckte Karte" title="Zugedeckte Karte" />
+					<img class="card" src="img/deck/bg.png" alt="Zugedeckte Karte" title="Zugedeckte Karte" />
+					
+					<h2>Gemeinschaftskarten</h2>
+					<img class="card" src="img/deck/clubs-10.png" alt="Kreuz 10" title="Kreuz 10" />
+					<img class="card" src="img/deck/clubs-j.png" alt="Kreuz Bube" title="Kreuz Bube" />
+					<img class="card" src="img/deck/clubs-q.png" alt="Kreuz Dame" title="Kreuz Dame" />
+					<img class="card cardspace" src="img/deck/bg.png" alt="Zugedeckte Karte" title="Zugedeckte Karte" />
+					<img class="card cardspace" src="img/deck/bg.png" alt="Zugedeckte Karte" title="Zugedeckte Karte" />
+					
+					<form method="post" action="#play">
+						<p>
+							<input type="submit" value="Fold" name="fold" id="fold" />
+							<input type="submit" value="Check" name="checl" id="check" />
+							<input type="submit" value="Bet" name="bet" id="bet" />
+						</p>
+					</form>
+					
+					<h2>Ihre Karten</h2>
+					<img class="card" src="img/deck/clubs-k.png" alt="Kreuz König" title="Kreuz König" />
+					<img class="card" src="img/deck/clubs-a.png" alt="Kreuz Ass" title="Kreuz Ass" />
+					
+					<p id="ticker">
+						+++ Neues Turnier am 23. Juni 1983 +++
+					</p>
+				</div>
+			</div>
+		
+			<p id="footer">
+				&copy; 2009 EWA Poker.
+			</p>
+		</div>
+	</body>
+</html>
