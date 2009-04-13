@@ -10,9 +10,17 @@
 		<servlet-name>PokerController</servlet-name>
 		<servlet-class>ewa.poker.servlets.PokerController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>RegisterController</servlet-name>
+		<servlet-class>ewa.poker.servlets.RegisterController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PokerController</servlet-name>
 		<url-pattern>/Poker</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegisterController</servlet-name>
+		<url-pattern>/Register</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>30</session-timeout>

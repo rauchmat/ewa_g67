@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -36,7 +37,7 @@
 					<h2>Registrieren</h2>
 					<p>Bitte f&uuml;llen Sie das untenstehende Formular aus!</p>
 					
-						<form action="#" method="post" id="sendeRegistrierung">
+						<form action="Register" method="post" id="sendeRegistrierung">
 						<h3>Pers&ouml;nliche Daten</h3>
 
 						<div class="formblock">
