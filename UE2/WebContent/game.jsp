@@ -31,7 +31,7 @@
 				<h1>EWA Poker</h1>
 			</div>
 			<div id="body">
-				<div id="infoborder"><p>Eingeloggt als <em xml:lang="en" >User Name</em>.</p></div>
+				<div id="infoborder"><p>Eingeloggt als <em xml:lang="en" ><%= gameBean.getPlayer().getUserName() %></em>.</p></div>
 				<div id="sidebar">
 					<jsp:include page="chips.jsp" flush="true" />
 					<hr class="accessibility" />
