@@ -1,6 +1,7 @@
 package ewa.poker.helper;
 
 import at.ac.tuwien.big.easyholdem.poker.Card;
+import at.ac.tuwien.big.easyholdem.poker.HandRank;
 
 public class CardHelper {
 	
@@ -80,6 +81,27 @@ public class CardHelper {
 		case TWO: rank="2"; break;
 		}
 		return rank;
+	}
+	
+	public static String getHandRankText(HandRank rank) {
+		if(rank == null) return "";
+		
+		return getHandRankText(rank.getRank());
+	}
+	
+	public static String getHandRankText(HandRank.Rank rank) {
+		switch(rank) {
+		case FLUSH: return "Flush";
+		case FOUROFAKIND: return "Four Of A Kind";
+		case FULLHOUSE: return "Full House";
+		case HIGH: return "High";
+		case PAIR: return "Pair";
+		case STRAIGHT: return "Straight";
+		case STRAIGHTFLUSH: return "Straight Flush";
+		case THREEOFAKIND: return "Three Of A Kind";
+		case TWOPAIR: return "Two Pair";
+		default: return "";
+		}
 	}
 
 	public static String getTextFromCard(final Card card) {
