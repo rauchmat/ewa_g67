@@ -58,7 +58,7 @@
 		<h2>Ihre Karten</h2>
 		<% for (int i = 0; i < 2; i++) { 
 			Card playerCard = gameBean.getPlayersCards().get(i); %>
-			<span id="playercard <%= i+1 %>" xml:lang="en">
+			<span id="playercard<%= i+1 %>" xml:lang="en">
 				<img src="<%= CardHelper.getImageFromCard(playerCard) %>"
 			     alt="Your card: <%= CardHelper.getTextFromCard(playerCard) %>"
 			     title="Your card: <%= CardHelper.getTextFromCard(playerCard) %>" />
