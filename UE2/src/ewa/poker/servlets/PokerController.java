@@ -1,6 +1,8 @@
 package ewa.poker.servlets;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import at.ac.tuwien.big.easyholdem.game.Action;
 import at.ac.tuwien.big.easyholdem.game.Game;
 import at.ac.tuwien.big.easyholdem.player.Player;
+import at.ac.tuwien.big.easyholdem.poker.Card;
+import at.ac.tuwien.big.easyholdem.poker.Cards;
+import at.ac.tuwien.big.easyholdem.probsim.ProbabilitySimulator;
 
 public class PokerController extends HttpServlet {
 
@@ -28,6 +33,7 @@ public class PokerController extends HttpServlet {
 
 	private static final String GAME_PATH = "/game.jsp";
 	private static final String GAME_BEAN_ID = "gameBean";
+	private static final String PROBABILITY_BEAN_ID = "probabilityBean";
 
 	private static final long serialVersionUID = 7830604605299588034L;
 	
@@ -73,6 +79,8 @@ public class PokerController extends HttpServlet {
 			
 			gameBean.act(Action.BET);
 			
+			createProbabilitySimulator(session, gameBean);
+			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
 					GAME_PATH);
 			disp.forward(request, response);
@@ -91,6 +99,8 @@ public class PokerController extends HttpServlet {
 			
 			gameBean.act(Action.CHECK);
 			
+			createProbabilitySimulator(session, gameBean);
+			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
 					GAME_PATH);
 			disp.forward(request, response);
@@ -107,6 +117,8 @@ public class PokerController extends HttpServlet {
 			// TODO better error handling
 			if(gameBean == null) return;
 			gameBean.act(Action.FOLD);
+			
+			session.setAttribute(PROBABILITY_BEAN_ID, null);
 			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
 					GAME_PATH);
@@ -133,6 +145,25 @@ public class PokerController extends HttpServlet {
 	private static void debugMessage(String message) {
 		System.out.println(message);
 	}
+	
+	private void createProbabilitySimulator(HttpSession session, Game gameBean) {
+		List<Card> cards = new Vector<Card>();
+		
+		if(gameBean.getFlopCards() != null)
+			cards.addAll(gameBean.getFlopCards());
+		
+		if(gameBean.getTurnCard() != null)
+			cards.add(gameBean.getTurnCard());
+		
+		if(gameBean.getRiverCard() != null)
+			cards.add(gameBean.getRiverCard());
+		
+		Cards board = new Cards(cards.size());
+		board.addAll(cards);
+		ProbabilitySimulator probabilityBean = new ProbabilitySimulator(gameBean.getPlayersCards(), board);
+		
+		session.setAttribute(PROBABILITY_BEAN_ID, probabilityBean.simulate());
+	}
 
 	private void startGame(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -154,6 +185,8 @@ public class PokerController extends HttpServlet {
 
 		// By default every game is played
 		gameBean.act(Action.ANTE);
+		
+		createProbabilitySimulator(session, gameBean);
 
 		RequestDispatcher disp = getServletContext().getRequestDispatcher(
 				GAME_PATH);

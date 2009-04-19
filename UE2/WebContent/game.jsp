@@ -33,9 +33,9 @@
 			<div id="body">
 				<div id="infoborder"><p>Eingeloggt als <em xml:lang="en" ><%= gameBean.getPlayer().getUserName() %></em>.</p></div>
 				<div id="sidebar">
-					<jsp:include page="chips.jsp" flush="true" />
+					<jsp:include page="WEB-INF/chips.jsp" flush="true" />
 					<hr class="accessibility" />
-					<jsp:include page="probabilities.jsp" flush="true" />
+					<jsp:include page="WEB-INF/probabilities.jsp" flush="true" />
 				</div>
 					<hr class="accessibility" />
 					<div id="main">
@@ -49,9 +49,9 @@
 							</form>
 						</div>
 						<% if(gameBean.getState() != State.END) { %>
-							<jsp:include page="table.jsp" flush="true" />
+							<jsp:include page="WEB-INF/table.jsp" flush="true" />
 						<% } else { %>
-							<jsp:include page="table_result.jsp" flush="true" />
+							<jsp:include page="WEB-INF/table_result.jsp" flush="true" />
 						<% } %>
 				</div>
 			</div>
