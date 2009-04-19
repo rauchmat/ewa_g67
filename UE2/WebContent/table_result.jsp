@@ -17,9 +17,9 @@
 			Sie haben aufgegeben und Ihren Einsatz verloren.
 		<% } else { %>
 			Sie haben mit
-			<em><%= CardHelper.getHandRankText(gameBean.getShowdownResult().getPlayersHandRank()) %></em>
+			<em xml:lang="en"><%= CardHelper.getHandRankText(gameBean.getShowdownResult().getPlayersHandRank()) %></em>
 			gegen
-			<em><%= CardHelper.getHandRankText(gameBean.getShowdownResult().getDealersHandRank()) %></em>
+			<em xml:lang="en"><%= CardHelper.getHandRankText(gameBean.getShowdownResult().getDealersHandRank()) %></em>
 			<% if(gameBean.getShowdownResult().hasPlayerWon()) { %>
 			GEWONNEN
 			<% } else { %>
