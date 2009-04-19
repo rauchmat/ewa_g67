@@ -38,9 +38,9 @@
 		<form action="Poker" method="post" id="moeglicheAktionen">
 		<h2>Aktionen</h2>
 		<p xml:lang="en">
-			<input type="submit" value="Fold" accesskey="f" tabindex="1" <%= gameBean.getPossibleActions().contains(Action.FOLD) ? "" : "disabled=\"disabled\"" %> /> 
-			<input type="submit" value="Check" accesskey="c" tabindex="2" <%= gameBean.getPossibleActions().contains(Action.CHECK) ? "" : "disabled=\"disabled\"" %> /> 
-			<input type="submit" value="Bet" accesskey="b" tabindex="3" <%= gameBean.getPossibleActions().contains(Action.BET) ? "" : "disabled=\"disabled\""  %> />
+			<input type="submit" value="Fold" name="Fold" accesskey="f" tabindex="1" <%= gameBean.getPossibleActions().contains(Action.FOLD) ? "" : "disabled=\"disabled\"" %> /> 
+			<input type="submit" value="Check" name="Check" accesskey="c" tabindex="2" <%= gameBean.getPossibleActions().contains(Action.CHECK) ? "" : "disabled=\"disabled\"" %> /> 
+			<input type="submit" value="Bet" name="Bet" accesskey="b" tabindex="3" <%= gameBean.getPossibleActions().contains(Action.BET) ? "" : "disabled=\"disabled\""  %> />
 		</p>
 		</form>
 	</div>
