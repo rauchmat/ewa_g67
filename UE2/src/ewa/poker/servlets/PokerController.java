@@ -114,15 +114,19 @@ public class PokerController extends HttpServlet {
 		} else { //default
 			debugMessage("Action: DEFAULT");
 			
+			Game gameBean = null;
+			
 			HttpSession session = request.getSession(false);
 			
-			// TODO better error handling
-			if(session == null) return;
-			
-			Game gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
+			if(session != null)
+				gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
 			
 			if(gameBean == null)
 				startGame(request, response);
+			else {
+				RequestDispatcher disp = getServletContext().getRequestDispatcher(GAME_PATH);
+				disp.forward(request, response);
+			}
 		}
 	}
 	
@@ -135,8 +139,17 @@ public class PokerController extends HttpServlet {
 		debugMessage("Starting new game");
 		
 		HttpSession session = request.getSession(true);
+		
+		Game oldGameBean = (Game) session.getAttribute(GAME_BEAN_ID);
+		int oldStackSize = Integer.MIN_VALUE;
+		
+		if(oldGameBean != null) {
+			oldStackSize = oldGameBean.getPlayer().getStack();
+			debugMessage("Got old stack: " + oldStackSize);
+		}
 
-		Game gameBean = new Game(getPlayer(), DEFAULT_BET_SIZE);
+		Game gameBean = new Game(getPlayer(oldStackSize), DEFAULT_BET_SIZE);
+		
 		session.setAttribute(GAME_BEAN_ID, gameBean);
 
 		// By default every game is played
@@ -147,10 +160,10 @@ public class PokerController extends HttpServlet {
 		disp.forward(request, response);
 	}
 
-	private static Player getPlayer() {
+	private static Player getPlayer(int oldStackSize) {
 		Player player = new Player();
 		player.setUserName(DEFAULT_USER_NAME);
-		player.setStack(DEFAULT_STACK_SIZE);
+		player.setStack(oldStackSize != Integer.MIN_VALUE ? oldStackSize : DEFAULT_STACK_SIZE);
 		return player;
 	}
 }
