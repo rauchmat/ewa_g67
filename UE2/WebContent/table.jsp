@@ -1,9 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="at.ac.tuwien.big.easyholdem.game.Action"%>
 <%@page import="at.ac.tuwien.big.easyholdem.poker.Card"%>
-
-
-<%@page import="at.ac.tuwien.big.easyholdem.game.State"%><jsp:useBean id="gameBean" class="at.ac.tuwien.big.easyholdem.game.Game" scope="session" />
+<%@page import="at.ac.tuwien.big.easyholdem.poker.Cards"%>
+<%@page import="at.ac.tuwien.big.easyholdem.game.State"%>
+<%@page import="ewa.poker.helper.CardHelper"%>
+<jsp:useBean id="gameBean" class="at.ac.tuwien.big.easyholdem.game.Game" scope="session" />
 
 <div id="table">
 	<div id="dealercards">
@@ -17,29 +18,24 @@
 	<div id="communitycards">
 		<h2>Gemeinschaftskarten</h2>
 		<span id="flop" xml:lang="en">
-			<% if (gameBean.getState().ordinal() > State.PRE_FLOP.ordinal()) {
-					for(int i = 0; i < gameBean.getFlopCards().size(); i++) { 
-			   Card card = gameBean.getFlopCards().get(i); 
-			   String cardName = String.format("%s of %s", card.getRank().name(), card.getSuit().name()); %>
+			<% for(int i = 0; i < 3; i++) { 
+				Card flopCard = null;
+				if (gameBean.getState().ordinal() > State.PRE_FLOP.ordinal())
+			   	 flopCard = gameBean.getFlopCards().get(i); %>
 				<span id="flop<%= i+1 %>">
-					<img src="img/deck/<%= card.toString() %>.png" alt="Flop: <%= cardName %>" title="Flop: <%= cardName %>" />
+					<img src="<%= CardHelper.getImageFromCard(flopCard) %>" alt="Flop: <%= CardHelper.getTextFromCard(flopCard) %>" title="Flop: <%= CardHelper.getTextFromCard(flopCard) %>" />
 				</span>
-			<% } 
-			} else { %>
-				<span id="flop1"><img src="img/deck/bg.png" alt="Flop: unknown" title="Flop: unknown" /></span>
-				<span id="flop2"><img src="img/deck/bg.png" alt="Flop: unknown" title="Flop: unknown" /></span>
-				<span id="flop3"><img src="img/deck/bg.png" alt="Flop: unknown" title="Flop: unknown"/></span>
 			<% } %>
 		</span>
 		<span id="turn" xml:lang="en">
-			<img src="img/deck/bg.png" alt="Turn: unkown" title="Turn: unknown" />
+			<img src="<%= CardHelper.getImageFromCard(gameBean.getTurnCard()) %>" alt="Turn: <%= CardHelper.getTextFromCard(gameBean.getTurnCard()) %>" title="Turn: <%= CardHelper.getTextFromCard(gameBean.getTurnCard()) %>" />
 		</span>
 		<span id="river" xml:lang="en">
-			<img src="img/deck/bg.png" alt="River: unknown" title="River: unknown" />
+			<img src="<%= CardHelper.getImageFromCard(gameBean.getRiverCard()) %>" alt="River: <%= CardHelper.getTextFromCard(gameBean.getRiverCard()) %>" title="River: <%= CardHelper.getTextFromCard(gameBean.getRiverCard()) %>" />
 		</span>
 	</div>
 	<div id="betboxes">
-		<form action="#" method="post" id="moeglicheAktionen">
+		<form action="Poker" method="post" id="moeglicheAktionen">
 		<h2>Aktionen</h2>
 		<p xml:lang="en">
 			<input type="submit" value="Fold" accesskey="f" tabindex="1" <%= gameBean.getPossibleActions().contains(Action.FOLD) ? "" : "disabled=\"disabled\"" %> /> 
@@ -50,12 +46,12 @@
 	</div>
 	<div id="playercards">
 		<h2>Ihre Karten</h2>
-		<span id="playercard1" xml:lang="en">
-			<img src="img/deck/clubs-k.png" alt="Your card: King of clubs" title="Your card: King of clubs" />
-		</span>
-		<span id="playercard2" xml:lang="en">
-			<img src="img/deck/clubs-a.png" alt="Your card: Ace of clubs" title="Your card: Ace of clubs" />
-		</span>
+		<% for (int i = 0; i < 2; i++) { 
+			Card playerCard = gameBean.getPlayersCards().get(i); %>
+			<span id="playercard <%= i+1 %>" xml:lang="en">
+				<img src="<%= CardHelper.getImageFromCard(playerCard) %>" alt="Your card: <%= CardHelper.getTextFromCard(playerCard) %>" title="Your card: <%= CardHelper.getTextFromCard(playerCard) %>" />
+			</span>
+		<% } %>
 	</div>
 	<div id="news">
 		<ul>

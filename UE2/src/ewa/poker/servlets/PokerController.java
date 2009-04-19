@@ -22,11 +22,20 @@ public class PokerController extends HttpServlet {
 	private static final String NEWGAME_KEY = "newGame";
 	private static final String CHANGEUSERDATA_KEY = "changeUserData";
 	private static final String LOGOUT_KEY = "logout";
+	private static final String BET_KEY = "Bet";
+	private static final String FOLD_KEY = "Fold";
+	private static final String CHECK_KEY = "Check";
 
-	private static final String TABLE_PATH = "/game.jsp";
+	private static final String GAME_PATH = "/game.jsp";
 	private static final String GAME_BEAN_ID = "gameBean";
 
 	private static final long serialVersionUID = 7830604605299588034L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		doPost(req, resp);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -41,6 +50,35 @@ public class PokerController extends HttpServlet {
 		if (req.getParameterMap().containsKey(LOGOUT_KEY)) {
 			// TODO: handle request
 		}
+		if (req.getParameterMap().containsKey(BET_KEY)) {
+			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			gameBean.act(Action.BET);
+			
+			RequestDispatcher disp = getServletContext().getRequestDispatcher(
+					GAME_PATH);
+			disp.forward(req, resp);
+		}
+		if (req.getParameterMap().containsKey(CHECK_KEY)) {
+			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			gameBean.act(Action.CHECK);
+			
+			RequestDispatcher disp = getServletContext().getRequestDispatcher(
+					GAME_PATH);
+			disp.forward(req, resp);
+		}
+		if (req.getParameterMap().containsKey(FOLD_KEY)) {
+			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			gameBean.act(Action.FOLD);
+			
+			RequestDispatcher disp = getServletContext().getRequestDispatcher(
+					GAME_PATH);
+			disp.forward(req, resp);
+		}
+		else {
+			//default
+			startGame(req, resp);
+			System.out.println("asdf");
+		}
 	}
 
 	private void startGame(HttpServletRequest req, HttpServletResponse resp)
@@ -54,7 +92,7 @@ public class PokerController extends HttpServlet {
 		gameBean.act(Action.ANTE);
 
 		RequestDispatcher disp = getServletContext().getRequestDispatcher(
-				TABLE_PATH);
+				GAME_PATH);
 		disp.forward(req, resp);
 	}
 
