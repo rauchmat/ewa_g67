@@ -1,0 +1,9 @@
+.metadata
+.classpath
+.project
+.settings
+.DS_Store
+*/build/*
+*/bin/*
+Servers/*
+.JETEmitters
