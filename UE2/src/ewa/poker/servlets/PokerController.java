@@ -32,64 +32,91 @@ public class PokerController extends HttpServlet {
 	private static final long serialVersionUID = 7830604605299588034L;
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(req, resp);
+		doPost(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (req.getParameterMap().containsKey(NEWGAME_KEY)) {
+		if (request.getParameterMap().containsKey(NEWGAME_KEY)) {
 			debugMessage("Action: NEWGAME");
-			startGame(req, resp);
-		}
-		if (req.getParameterMap().containsKey(CHANGEUSERDATA_KEY)) {
+			startGame(request, response);
+		} else if (request.getParameterMap().containsKey(CHANGEUSERDATA_KEY)) {
 			debugMessage("Action: CHANGEUSERDATA");
 			// TODO: handle request
-		}
-		if (req.getParameterMap().containsKey(LOGOUT_KEY)) {
+		} else if (request.getParameterMap().containsKey(LOGOUT_KEY)) {
 			debugMessage("Action: LOGOUT");
 			// TODO: handle request
-		}
-		if (req.getParameterMap().containsKey(BET_KEY)) {
+		} else if (request.getParameterMap().containsKey(BET_KEY)) {
 			debugMessage("Action: BET");
 			
-			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			HttpSession session = request.getSession(false);
+			
+			// TODO better error handling
+			if(session == null) return;
+			
+			Game gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
+			
+			// TODO better error handling
+			if(gameBean == null) return;
+			
 			gameBean.act(Action.BET);
 			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
 					GAME_PATH);
-			disp.forward(req, resp);
-		}
-		if (req.getParameterMap().containsKey(CHECK_KEY)) {
+			disp.forward(request, response);
+		} else if (request.getParameterMap().containsKey(CHECK_KEY)) {
 			debugMessage("Action: CHECK");
 			
-			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			HttpSession session = request.getSession(false);
+			
+			// TODO better error handling
+			if(session == null) return;
+			
+			Game gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
+			
+			// TODO better error handling
+			if(gameBean == null) return;
+			
 			gameBean.act(Action.CHECK);
 			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
 					GAME_PATH);
-			disp.forward(req, resp);
-		}
-		if (req.getParameterMap().containsKey(FOLD_KEY)) {
+			disp.forward(request, response);
+		} else if (request.getParameterMap().containsKey(FOLD_KEY)) {
 			debugMessage("Action: FOLD");
 			
-			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			HttpSession session = request.getSession(false);
+			
+			// TODO better error handling
+			if(session == null) return;
+			
+			Game gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
+			
+			// TODO better error handling
+			if(gameBean == null) return;
+			
 			gameBean.act(Action.FOLD);
 			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
 					GAME_PATH);
-			disp.forward(req, resp);
-		}
-		else { //default
+			disp.forward(request, response);
+		} else { //default
 			debugMessage("Action: DEFAULT");
 			
-			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			HttpSession session = request.getSession(false);
+			
+			// TODO better error handling
+			if(session == null) return;
+			
+			Game gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
+			
 			
 			if(gameBean == null)
-				startGame(req, resp);
+				startGame(request, response);
 		}
 	}
 	
@@ -97,11 +124,11 @@ public class PokerController extends HttpServlet {
 		System.out.println(message);
 	}
 
-	private void startGame(HttpServletRequest req, HttpServletResponse resp)
+	private void startGame(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		debugMessage("Starting new game");
 		
-		HttpSession session = req.getSession(true);
+		HttpSession session = request.getSession(true);
 
 		Game gameBean = new Game(getPlayer(), DEFAULT_BET_SIZE);
 		session.setAttribute(GAME_BEAN_ID, gameBean);
@@ -111,7 +138,7 @@ public class PokerController extends HttpServlet {
 
 		RequestDispatcher disp = getServletContext().getRequestDispatcher(
 				GAME_PATH);
-		disp.forward(req, resp);
+		disp.forward(request, response);
 	}
 
 	private static Player getPlayer() {
