@@ -42,15 +42,20 @@ public class PokerController extends HttpServlet {
 			throws ServletException, IOException {
 
 		if (req.getParameterMap().containsKey(NEWGAME_KEY)) {
+			debugMessage("Action: NEWGAME");
 			startGame(req, resp);
 		}
 		if (req.getParameterMap().containsKey(CHANGEUSERDATA_KEY)) {
+			debugMessage("Action: CHANGEUSERDATA");
 			// TODO: handle request
 		}
 		if (req.getParameterMap().containsKey(LOGOUT_KEY)) {
+			debugMessage("Action: LOGOUT");
 			// TODO: handle request
 		}
 		if (req.getParameterMap().containsKey(BET_KEY)) {
+			debugMessage("Action: BET");
+			
 			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
 			gameBean.act(Action.BET);
 			
@@ -59,6 +64,8 @@ public class PokerController extends HttpServlet {
 			disp.forward(req, resp);
 		}
 		if (req.getParameterMap().containsKey(CHECK_KEY)) {
+			debugMessage("Action: CHECK");
+			
 			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
 			gameBean.act(Action.CHECK);
 			
@@ -67,6 +74,8 @@ public class PokerController extends HttpServlet {
 			disp.forward(req, resp);
 		}
 		if (req.getParameterMap().containsKey(FOLD_KEY)) {
+			debugMessage("Action: FOLD");
+			
 			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
 			gameBean.act(Action.FOLD);
 			
@@ -74,21 +83,30 @@ public class PokerController extends HttpServlet {
 					GAME_PATH);
 			disp.forward(req, resp);
 		}
-		else {
-			//default
-			startGame(req, resp);
-			System.out.println("asdf");
+		else { //default
+			debugMessage("Action: DEFAULT");
+			
+			Game gameBean = (Game) req.getAttribute(GAME_BEAN_ID);
+			
+			if(gameBean == null)
+				startGame(req, resp);
 		}
+	}
+	
+	private static void debugMessage(String message) {
+		System.out.println(message);
 	}
 
 	private void startGame(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		debugMessage("Starting new game");
+		
 		HttpSession session = req.getSession(true);
 
 		Game gameBean = new Game(getPlayer(), DEFAULT_BET_SIZE);
 		session.setAttribute(GAME_BEAN_ID, gameBean);
 
-		// Standardly, every game is played
+		// By default every game is played
 		gameBean.act(Action.ANTE);
 
 		RequestDispatcher disp = getServletContext().getRequestDispatcher(
