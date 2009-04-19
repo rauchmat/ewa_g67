@@ -98,7 +98,6 @@ public class PokerController extends HttpServlet {
 			
 			// TODO better error handling
 			if(gameBean == null) return;
-			
 			gameBean.act(Action.FOLD);
 			
 			RequestDispatcher disp = getServletContext().getRequestDispatcher(
@@ -113,7 +112,6 @@ public class PokerController extends HttpServlet {
 			if(session == null) return;
 			
 			Game gameBean = (Game) session.getAttribute(GAME_BEAN_ID);
-			
 			
 			if(gameBean == null)
 				startGame(request, response);
