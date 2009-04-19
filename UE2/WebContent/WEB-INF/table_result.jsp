@@ -33,40 +33,49 @@
 		<% for (int i = 0; i < gameBean.getShowdownResult().getDealersCards().size(); i++) { 
 			Card playerCard = gameBean.getShowdownResult().getDealersCards().get(i); %>
 			<span id="dealercard<%= i+1 %>" xml:lang="en">
-				<img src="<%= CardHelper.getImageFromCard(playerCard) %>" alt="Croupier's card: <%= CardHelper.getTextFromCard(playerCard) %>" title="Croupier's card: <%= CardHelper.getTextFromCard(playerCard) %>" />
+				<img src="<%= CardHelper.getImageFromCard(playerCard) %>"
+				     alt="Croupier's card: <%= CardHelper.getTextFromCard(playerCard) %>"
+				     title="Croupier's card: <%= CardHelper.getTextFromCard(playerCard) %>" />
 			</span>
 		<% } %>
 	</div>
 	<div id="communitycards">
 		<h2>Gemeinschaftskarten</h2>
 		<span id="flop" xml:lang="en">
-			<% for(int i = 0; i < gameBean.getShowdownResult().getFlopCards().size(); i++) { 
+			<% for(int i = 0; i < 3; i++) { 
 				Card flopCard = null;
-				if (gameBean.getState().ordinal() > State.PRE_FLOP.ordinal())
+				if (gameBean.getState().ordinal() > State.PRE_FLOP.ordinal() &&
+				    i < gameBean.getShowdownResult().getFlopCards().size())
 			   	 flopCard = gameBean.getShowdownResult().getFlopCards().get(i); %>
 				<span id="flop<%= i+1 %>">
-					<img src="<%= CardHelper.getImageFromCard(flopCard) %>" alt="Flop: <%= CardHelper.getTextFromCard(flopCard) %>" title="Flop: <%= CardHelper.getTextFromCard(flopCard) %>" />
+					<img src="<%= CardHelper.getImageFromCard(flopCard) %>"
+					     alt="Flop: <%= CardHelper.getTextFromCard(flopCard) %>"
+					     title="Flop: <%= CardHelper.getTextFromCard(flopCard) %>" />
 				</span>
 			<% } %>
 		</span>
 		<span id="turn" xml:lang="en">
-			<img src="<%= CardHelper.getImageFromCard(gameBean.getShowdownResult().getTurnCard()) %>" alt="Turn: <%= CardHelper.getTextFromCard(gameBean.getTurnCard()) %>" title="Turn: <%= CardHelper.getTextFromCard(gameBean.getTurnCard()) %>" />
+			<img src="<%= CardHelper.getImageFromCard(gameBean.getShowdownResult().getTurnCard()) %>"
+			     alt="Turn: <%= CardHelper.getTextFromCard(gameBean.getTurnCard()) %>"
+			     title="Turn: <%= CardHelper.getTextFromCard(gameBean.getTurnCard()) %>" />
 		</span>
 		<span id="river" xml:lang="en">
-			<img src="<%= CardHelper.getImageFromCard(gameBean.getShowdownResult().getRiverCard()) %>" alt="River: <%= CardHelper.getTextFromCard(gameBean.getRiverCard()) %>" title="River: <%= CardHelper.getTextFromCard(gameBean.getRiverCard()) %>" />
+			<img src="<%= CardHelper.getImageFromCard(gameBean.getShowdownResult().getRiverCard()) %>"
+			     alt="River: <%= CardHelper.getTextFromCard(gameBean.getRiverCard()) %>"
+			     title="River: <%= CardHelper.getTextFromCard(gameBean.getRiverCard()) %>" />
 		</span>
 	</div>
-	<% if(gameBean.getShowdownResult().getPlayersHandRank() != null) { %>
 	<div id="playercards">
 		<h2>Ihre Karten</h2>
-		<% for (int i = 0; i < gameBean.getShowdownResult().getPlayersCards().size(); i++) { 
-			Card playerCard = gameBean.getShowdownResult().getPlayersCards().get(i); %>
+		<% for (int i = 0; i < gameBean.getPlayersCards().size(); i++) { 
+			Card playerCard = gameBean.getPlayersCards().get(i); %>
 			<span id="playercard<%= i+1 %>" xml:lang="en">
-				<img src="<%= CardHelper.getImageFromCard(playerCard) %>" alt="Your card: <%= CardHelper.getTextFromCard(playerCard) %>" title="Your card: <%= CardHelper.getTextFromCard(playerCard) %>" />
+				<img src="<%= CardHelper.getImageFromCard(playerCard) %>"
+				     alt="Your card: <%= CardHelper.getTextFromCard(playerCard) %>"
+				     title="Your card: <%= CardHelper.getTextFromCard(playerCard) %>" />
 			</span>
 		<% } %>
 	</div>
-	<% } %>
 	<div id="news">
 		<ul>
 			<li>+++ Neues Turnier am 23. Juni 1983 +++</li>
