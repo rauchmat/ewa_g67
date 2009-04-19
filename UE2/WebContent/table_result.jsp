@@ -12,12 +12,14 @@
 		<h2>Spiel beendet</h2>
 		<p>
 		<% if(gameBean.getShowdownResult().isSplitPot()) { %>
-			Der Pot wird geteilt (<% CardHelper.getHandRankText(gameBean.getShowdownResult().getDealersHandRank()); %>).
+			Der Pot wird geteilt (<%= CardHelper.getHandRankText(gameBean.getShowdownResult().getDealersHandRank()) %>).
 		<% } else if(gameBean.getShowdownResult().getPlayersHandRank() == null) { %>
 			Sie haben aufgegeben und Ihren Einsatz verloren.
 		<% } else { %>
-			Sie haben mit <% CardHelper.getHandRankText(gameBean.getShowdownResult().getPlayersHandRank()); %>
-			gegen <% CardHelper.getHandRankText(gameBean.getShowdownResult().getDealersHandRank()); %>
+			Sie haben mit
+			<em><%= CardHelper.getHandRankText(gameBean.getShowdownResult().getPlayersHandRank()) %></em>
+			gegen
+			<em><%= CardHelper.getHandRankText(gameBean.getShowdownResult().getDealersHandRank()) %></em>
 			<% if(gameBean.getShowdownResult().hasPlayerWon()) { %>
 			GEWONNEN
 			<% } else { %>
