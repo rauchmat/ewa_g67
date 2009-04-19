@@ -3,6 +3,8 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="at.ac.tuwien.big.easyholdem.game.State"%>
+<jsp:useBean id="gameBean" class="at.ac.tuwien.big.easyholdem.game.Game" scope="session" />
 
 <html xmlns="http://www.w3.org/1999/xhtml"  xml:lang="de">
 	<head>
@@ -46,7 +48,11 @@
 								</ul>
 							</form>
 						</div>
-						<jsp:include page="table.jsp" flush="true" />
+						<% if(gameBean.getState() != State.END) { %>
+							<jsp:include page="table.jsp" flush="true" />
+						<% } else { %>
+							<jsp:include page="table_result.jsp" flush="true" />
+						<% } %>
 				</div>
 			</div>
 			<div id="footer">
