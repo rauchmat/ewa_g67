@@ -1,9 +1,6 @@
 package ewa.poker.helper;
 
-import at.ac.tuwien.big.easyholdem.game.Game;
-import at.ac.tuwien.big.easyholdem.game.State;
 import at.ac.tuwien.big.easyholdem.poker.Card;
-import at.ac.tuwien.big.easyholdem.poker.Cards;
 
 public class CardHelper {
 	
