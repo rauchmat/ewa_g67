@@ -47,9 +47,17 @@ public class PokerController extends HttpServlet {
 		} else if (request.getParameterMap().containsKey(CHANGEUSERDATA_KEY)) {
 			debugMessage("Action: CHANGEUSERDATA");
 			// TODO: handle request
+			
+			RequestDispatcher disp = getServletContext().getRequestDispatcher(
+					GAME_PATH);
+			disp.forward(request, response);
 		} else if (request.getParameterMap().containsKey(LOGOUT_KEY)) {
 			debugMessage("Action: LOGOUT");
 			// TODO: handle request
+			
+			RequestDispatcher disp = getServletContext().getRequestDispatcher(
+					GAME_PATH);
+			disp.forward(request, response);
 		} else if (request.getParameterMap().containsKey(BET_KEY)) {
 			debugMessage("Action: BET");
 			
