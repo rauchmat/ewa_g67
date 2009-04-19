@@ -42,9 +42,9 @@
 						<div id="navigation">
 							<form method="post" action="Poker">
 								<ul>
-									<li><input type="submit" name="changeUserData" value="Userdaten &auml;ndern" accesskey="u" /></li>
+									<li><input type="submit" name="changeUserData" value="Userdaten &auml;ndern" accesskey="u" disabled="disabled" /></li>
 									<li><input type="submit" name="newGame" value="Neues Spiel" accesskey="n" /></li>
-									<li><input type="submit" name="logout" value="Ausloggen" accesskey="o" /></li>
+									<li><input type="submit" name="logout" value="Ausloggen" accesskey="o" disabled="disabled" /></li>
 								</ul>
 							</form>
 						</div>

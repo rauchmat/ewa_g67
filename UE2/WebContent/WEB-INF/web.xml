@@ -19,6 +19,10 @@
 		<url-pattern>/Poker</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>PokerController</servlet-name>
+		<url-pattern>/table.jsp</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>RegisterController</servlet-name>
 		<url-pattern>/Register</url-pattern>
 	</servlet-mapping>
