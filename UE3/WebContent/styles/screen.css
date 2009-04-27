@@ -1,0 +1,272 @@
+body {
+	font-family: sans-serif;
+	font-size: 80%;
+}
+
+table {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+}
+
+table tbody {
+	padding:0;
+}
+
+.accessibility {
+	visibility:hidden;
+	width:0;
+	height:0;
+	position:absolute;
+	left:-999px;
+	top:-999px;
+}
+
+#wrapper {
+	margin: 0pt auto;
+	position: relative;
+	min-width: 50em;
+	max-width: 70em;
+}
+
+#header {
+	background-image: url(../img/logo.png);
+	background-repeat: no-repeat;
+	display: block;
+}
+#header h1 {
+	text-indent: -999em;
+	height: 66px;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+#teaser {
+	float:right;
+	background-image: url(../img/chips.png);
+	background-position: right;
+	background-repeat:no-repeat;
+	height: 66px;
+	width: 200px;
+
+}
+
+#body {
+	border: 2px solid #f29400;
+}
+
+#infoborder {
+	background-color: #f29400;
+	height: 2em;
+	text-align: right;
+	color: #FFFFFF;
+}
+
+#infoborder p {
+	margin: 0px 0px 0px 0px;
+	line-height: 1.5em;
+	padding-right: 0.3em;
+}
+
+#infoborder a {
+	background-color: inherit;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+#sidebar {
+	background-color: #FFFFFF;
+	color:#04491B;
+	width: 15em;
+	position: absolute;
+	left: 2px;
+}
+
+#sidebar ul {
+	border-bottom : 1px solid #f29400;
+	list-style-image:url(../img/bullet.png);
+	margin-top: 1em;
+	margin-left: 0;
+	padding-left: 3em;
+}
+
+#sidebar li {
+    margin-left: 0.5em;
+}
+
+#sidebar li a {
+	color: #04491b;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 3em;
+}
+
+#chips {
+	font-size: 90%;
+	width: 100%;
+	padding-bottom: 1em;
+	color: #000000;
+	border-bottom : 1px solid #f29400;
+}
+
+#chips td {
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+}
+
+#probabilities {
+	width: 100%;
+	font-size: 90%;
+	padding-bottom: 1em;
+	color: #000000;
+	border-bottom : 1px solid #f29400;
+}
+
+#probabilities table {
+    margin-bottom: 1em;
+}
+
+#probabilities td {
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+}
+
+#navigation ul {
+	margin-top: 0;
+	padding-top: 0;
+	text-align: right;
+	list-style: none;
+	padding-right: 0.5em;
+}
+
+#navigation ul li {
+	display: inline;
+}
+
+#navigation ul li input[type=submit] {
+	border: 1px solid #f29400;
+	border-top: none;
+	background-color: #ffffff;
+	color: #000000;
+	margin-top: -1em;
+}
+
+#news {
+	margin-top: 1em;
+	border-top: 1px solid #f29400;
+}
+
+#news ul {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	list-style: none;
+	text-align: center;
+}
+
+#news ul li {
+	display: inline;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+#main {
+	background-color: #2D5B2A;
+	background-image: url(../img/table-bg.png);
+	border-left: 2px solid #f29400;
+	margin-left: 15em;
+	margin-top: 0em;
+	padding-top: 0.001em;
+}
+
+#table {
+	text-align: center;
+	margin-top: 0em;
+	padding-top: 0.5em;
+    overflow: auto;
+}
+
+#betboxes h2 {
+	display: none;
+}
+
+#dealercards h2, #communitycards h2, #playercards h2, #gameresult {
+	color: #FFFFFF;
+	background-color:inherit;
+	font-family: sans-Serif;
+	font-size: 1em;
+	margin-bottom: 0.3em;
+}
+
+#turn, #river {
+	padding-left: 1.5em;
+}
+
+#footer {
+	text-align: right;
+	font-size: 0.8em;
+	font-family: sans-serif;
+}
+
+#content {
+	text-align: left;
+	background: #2D5B2A;
+	background-image: url(../img/table-bg.png);
+	margin-left: 15em;
+	padding-left: 1em;
+	margin-top: 0;
+	padding-top: 1em;
+	margin-bottom: 0;
+	padding-bottom: 1em;
+	border-left: 2px solid #f29400;
+	color: #FFFFFF;
+}
+
+fieldset {
+	border: none;
+}
+
+#buttons {
+	margin-top: 1em;
+}
+
+.formblock #buttons {
+	margin-top: 2em;
+	margin-bottom: 1em;
+	width: 21.2em;
+	text-align: right;
+}
+
+
+.formblock form {
+  display:block;
+  overflow: auto;
+}
+
+.formblock label {
+  float:left;
+  display:block;
+  width: 9em;
+  margin: 0.5em 0 0.5em 0;
+  clear:both;
+}
+
+.formblock input, textarea, select {
+  float:left;
+  display:block;
+  margin: 0.2em 0 0.2em 0;
+}
+
+.formblock input[type=submit] {
+  float:right;
+}
+
+.formblock fieldset {
+  clear:both;
+  display:block;
+  border:0;
+}
+
+.clearer {
+  clear:both;
+}
