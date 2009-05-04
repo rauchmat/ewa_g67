@@ -47,26 +47,33 @@
 	
 							<div class="formblock">
 							<fieldset>
+							
 								<div>
 									<label class="Float" for="sendeRegistrierung:firstname">Vorname</label>
-									<h:inputText id="firstname" label="Vorname" required="true" value="#{playerBean.firstName}"
+									<h:inputText id="firstname" label="Vorname" required="true"
+										value="#{playerBean.firstName}"
 										requiredMessage="#{registerController.requiredMessage}" />
 									<div class="message"><h:message for="firstname" /></div>
 								</div>
+								
 								<div>
 									<label class="Float" for="sendeRegistrierung:lastname">Nachname</label>
 									<h:inputText id="lastname" label="Nachname" required="true"
-										requiredMessage="#{registerController.requiredMessage}" value="#{playerBean.lastName}" />
+										requiredMessage="#{registerController.requiredMessage}"
+										value="#{playerBean.lastName}" />
 									<div class="message"><h:message for="lastname" /></div>
 								</div>
+								
 								<div>
 									<label class="Float" for="sendeRegistrierung:dateofbirth">Geburtsdatum</label>
 									<h:inputText id="dateofbirth" label="Geburtsdatum"
-										required="true" requiredMessage="#{registerController.requiredMessage}" value="#{playerBean.dateOfBirth}" >
-										<f:convertDateTime type="date" pattern="dd.MM.YYYY"/>
+										required="true" requiredMessage="#{registerController.requiredMessage}"
+										value="#{playerBean.dateOfBirth}" >
+										<f:convertDateTime type="date" pattern="dd.MM.yyyy" dateStyle="short" />
 									</h:inputText>
 									<div class="message"><h:message for="dateofbirth" /></div>
 								</div>
+								
 								<div>
       				                <label class="Float" for="sendeRegistrierung:sex">Geschlecht</label>
       				                <h:selectOneMenu id="sex" required="true" value="#{playerBean.gender}" 
@@ -75,6 +82,7 @@
 									</h:selectOneMenu>
       				                <div class="message"><h:message for="sex" /></div>
               					</div>
+              					
 							</fieldset>
 							</div>
 	
@@ -82,9 +90,11 @@
 								<span xml:lang="en">Stack</span></h3>
 							<div class="formblock">
 								<fieldset>
+								
 									<div>
 										<label class="Float" for="sendeRegistrierung:username">Username</label>
-										<h:inputText id="username" label="Username" required="true" value="#{playerBean.userName}"
+										<h:inputText id="username" label="Username" required="true"
+											value="#{playerBean.userName}"
 											requiredMessage="#{registerController.requiredMessage}">
 											<f:validator validatorId="UsernameValidator"/>
 										</h:inputText>
@@ -93,7 +103,8 @@
 	
 									<div>
 										<label class="Float" for="sendeRegistrierung:password">Passwort</label>
-										<h:inputSecret id="password" label="Passwort" required="true" value="#{playerBean.password}"
+										<h:inputSecret id="password" label="Passwort" required="true"
+											value="#{playerBean.password}"
 											requiredMessage="#{registerController.requiredMessage}">
 											<f:validateLength minimum="8" />
 										</h:inputSecret>
@@ -102,13 +113,15 @@
 	
 									<div>
 										<label class="Float" for="sendeRegistrierung:stack">Gr&ouml;&szlig;e des
-											Gr&ouml;&szlig;e des Stack<span xml:lang="en">Stack</span></label>
-										<h:inputText id="stack" label="Gr&ouml;&szlig;e des Stack" required="true" value="#{playerBean.stack}"
+											Gr&ouml;&szlig;e des <span xml:lang="en">Stack</span></label>
+										<h:inputText id="stack" label="Größe des Stack" required="true"
+											value="#{playerBean.stack}"
 											requiredMessage="#{registerController.requiredMessage}">
 											<f:convertNumber />
 										</h:inputText>
 										<div class="message"><h:message for="stack" /></div>
 									</div>
+									
 								</fieldset>
 							</div>
 							<div id="buttons">

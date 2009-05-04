@@ -7,7 +7,12 @@ import at.ac.tuwien.big.easyholdem.player.Player.Gender;
 
 public class PlayerBean {
 
-	private Player player = new Player();
+	private Player player;
+
+	public PlayerBean() {
+		player = new Player();
+		// player.setDateOfBirth(new Date(0));
+	}
 
 	public Date getDateOfBirth() {
 		return player.getDateOfBirth();
