@@ -13,7 +13,7 @@ public class UsernameValidator implements Validator {
 
 		// TODO check for existing username
 
-		final boolean valid = enteredUsername.equalsIgnoreCase("max");
+		final boolean valid = !enteredUsername.equalsIgnoreCase("max");
 
 		if (!valid) {
 			final FacesMessage message = new FacesMessage();
