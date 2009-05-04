@@ -190,7 +190,7 @@ table tbody {
 	display: none;
 }
 
-#dealercards h2, #communitycards h2, #playercards h2, #gameresult {
+#dealercards h2, #communitycards h2, #playercards h2 {
 	color: #FFFFFF;
 	background-color:inherit;
 	font-family: sans-Serif;
@@ -200,6 +200,10 @@ table tbody {
 
 #turn, #river {
 	padding-left: 1.5em;
+}
+
+#result p {
+    color: #ffffff;
 }
 
 #footer {
@@ -268,5 +272,13 @@ fieldset {
 }
 
 .clearer {
+  clear:both;
+}
+
+.formblock message {
+  float:left;
+  display:block;
+  width: 9em;
+  margin: 0.5em 0 0.5em 0;
   clear:both;
 }
