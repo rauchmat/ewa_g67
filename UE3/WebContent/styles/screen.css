@@ -226,6 +226,11 @@ table tbody {
 	color: #FFFFFF;
 }
 
+#main #content {
+	border-left: 0px none;
+	margin-left: 0;
+}
+
 fieldset {
 	border: none;
 }
@@ -279,6 +284,7 @@ fieldset {
   float:left;
   display:block;
   width: 9em;
+  height: 1.5em;
   margin: 0.5em 0 0.5em 0;
   clear:both;
 }

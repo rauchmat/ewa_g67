@@ -1,8 +1,11 @@
 package at.ac.tuwien.big.ewa.ue3.controller;
 
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
+import at.ac.tuwien.big.easyholdem.player.Player;
 import at.ac.tuwien.big.easyholdem.player.Player.Gender;
+import at.ac.tuwien.big.ewa.ue3.Constants;
 
 public class RegisterController {
 
@@ -20,7 +23,18 @@ public class RegisterController {
 	}
 
 	public String register() {
-		return RegisterController.FAIL;
-	}
+		try {
+			final HttpServletRequest request = (HttpServletRequest) javax.faces.context.FacesContext
+			        .getCurrentInstance().getExternalContext().getRequest();
+			final Player playerBean = (Player) request.getAttribute("registerPlayerBean");
 
+			Constants.playerDao.persist(playerBean);
+
+			if (playerBean.getId() == 0) return RegisterController.FAIL;
+
+			return RegisterController.SUCCESS;
+		} catch (final Exception e) {
+			return RegisterController.FAIL;
+		}
+	}
 }

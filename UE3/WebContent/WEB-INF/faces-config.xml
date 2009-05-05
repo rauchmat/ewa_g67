@@ -5,12 +5,31 @@
 	<managed-bean>
 		<managed-bean-name>indexController</managed-bean-name>
 		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.IndexController</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>registerController</managed-bean-name>
 		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.RegisterController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>loginController</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.LoginController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>player</property-name>
+			<value>#{playerBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>registerPlayerBean</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.easyholdem.player.Player</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>playerBean</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.easyholdem.player.Player</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
 		<display-name>index</display-name>
@@ -20,7 +39,7 @@
 			<to-view-id>/login.jsp</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{indexController.register}</from-action>
+			<from-outcome>register</from-outcome>
 			<to-view-id>/register.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -40,6 +59,7 @@
 		<display-name>login</display-name>
 		<from-view-id>/login.jsp</from-view-id>
 		<navigation-case>
+			<from-outcome>success</from-outcome>
 			<to-view-id>/welcome.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -70,8 +90,32 @@
 			<to-view-id>/index.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>login</display-name>
+		<from-view-id>/login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>failUser</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login</display-name>
+		<from-view-id>/login.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>failPassword</from-outcome>
+			<to-view-id>/login.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<validator>
 		<validator-id>UsernameValidator</validator-id>
 		<validator-class>at.ac.tuwien.big.ewa.ue3.validator.UsernameValidator</validator-class>
 	</validator>
+	<validator>
+		<validator-id>PasswordValidator</validator-id>
+		<validator-class>at.ac.tuwien.big.ewa.ue3.validator.PasswordValidator</validator-class>
+	</validator>
+	<converter>
+		<converter-id>GenderConverter</converter-id>
+		<converter-class>at.ac.tuwien.big.ewa.ue3.converter.GenderConverter</converter-class>
+	</converter>
 </faces-config>
