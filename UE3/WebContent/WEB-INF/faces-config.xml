@@ -11,6 +11,10 @@
 		<managed-bean-name>registerController</managed-bean-name>
 		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.RegisterController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>player</property-name>
+			<value>#{playerBean}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>loginController</managed-bean-name>

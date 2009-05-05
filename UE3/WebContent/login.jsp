@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/screen.css"/>
 	</head>
 	<body>
-		<f:view>
+		<f:view beforePhase="#{loginController.beforePhase}">
 			<ul class="accessibility">
 				<li><a href="#content" accesskey="0">Registrierungs-Formular</a></li>
 				<li><a href="#navigation" accesskey="1">Navigation</a></li>

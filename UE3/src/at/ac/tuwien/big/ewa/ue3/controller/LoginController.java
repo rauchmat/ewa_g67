@@ -1,5 +1,9 @@
 package at.ac.tuwien.big.ewa.ue3.controller;
 
+import java.io.IOException;
+
+import javax.faces.event.PhaseEvent;
+
 import at.ac.tuwien.big.easyholdem.player.Player;
 import at.ac.tuwien.big.ewa.ue3.Constants;
 
@@ -7,7 +11,15 @@ public class LoginController {
 
 	protected Player player;
 
-	public Player getPlayerBean() {
+	public void beforePhase(PhaseEvent phase) {
+		if (player != null && player.getId() != 0) try {
+			phase.getFacesContext().getExternalContext().redirect("welcome.jsp");
+		} catch (final IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Player getPlayer() {
 		return player;
 	}
 
