@@ -104,9 +104,11 @@
 		                             </p>
 	                            </h:form>
 	                        </div>
-	                        <div id="result"><p>
-	                        	<h:message for="gameBean" />
-	                        </p></div>
+	                        <div id="result">
+	                        	<p>
+	                        		<h:outputText value="#{tableController.gameResult}" escape="false" />
+	                        	</p>
+	                        </div>
 	                        <div id="playercards">
 	                            <h2>Ihre Karten</h2>
 	                            <span id="playercard1" xml:lang="en">
