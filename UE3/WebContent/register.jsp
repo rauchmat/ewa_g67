@@ -29,11 +29,11 @@
 					<h1>EWA Poker</h1>
 				</div>
 				<div id="body">
-					<div id="infoborder"><p><a href="#">Einloggen</a> oder <a href="#">Registrieren</a></p></div>
+					<div id="infoborder"><p><a href="login.jsp">Einloggen</a> oder <a href="register.jsp">Registrieren</a></p></div>
 					<div id="sidebar">
 						<ul id="navigation">
-							<li><a href="faces/login.jsp" accesskey="l" xml:lang="en">Login</a></li>
-							<li><a href="faces/register.jsp" >Registrieren</a></li>
+							<li><a href="login.jsp" accesskey="l" xml:lang="en">Login</a></li>
+							<li><a href="register.jsp" >Registrieren</a></li>
 						</ul>
 					</div>
 					<hr class="accessibility" />
