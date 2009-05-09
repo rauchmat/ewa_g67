@@ -8,7 +8,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
 	<head>
-		<title>EWA Poker :: Benutzerdaten &auml;dern</title>
+		<title>EWA Poker :: Benutzerdaten &auml;ndern</title>
 		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
 		<meta name="description" content="Benutzerdatenverwaltungs-Seite des EWA Poker Portals."/>
 		<meta name="keywords" content="account EWA poker"/>
