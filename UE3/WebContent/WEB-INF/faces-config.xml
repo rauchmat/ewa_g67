@@ -21,8 +21,7 @@
 		</managed-property>
 		<managed-property>
 			<property-name>requestPlayer</property-name>
-			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
-			<value></value>
+			<value>#{requestPlayerBean}</value>
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
@@ -58,8 +57,7 @@
 		</managed-property>
 		<managed-property>
 			<property-name>requestPlayer</property-name>
-			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
-			<value></value>
+			<value>#{requestPlayerBean}</value>
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
