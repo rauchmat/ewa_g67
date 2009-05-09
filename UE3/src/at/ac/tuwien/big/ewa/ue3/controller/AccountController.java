@@ -27,14 +27,19 @@ public class AccountController extends LogoutControllerBase {
 	}
 
 	public String save() {
+		final Player databasePlayer = Constants.playerDao.getPlayerById(player.getId());
+
+		databasePlayer.setStack(player.getStack());
+
+		if (player.getPassword() != null && player.getPassword().length() > 8)
+		    databasePlayer.setPassword(player.getPassword());
+
 		final Player playerBean = (Player) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(
 		        "playerBean");
+		playerBean.setStack(databasePlayer.getStack());
+		playerBean.setPassword(databasePlayer.getPassword());
 
-		playerBean.setStack(player.getStack());
-
-		if (player.getPassword().length() > 8) playerBean.setPassword(getRequestPlayer().getPassword());
-
-		Constants.playerDao.update(playerBean);
+		Constants.playerDao.update(databasePlayer);
 
 		return "save";
 	}

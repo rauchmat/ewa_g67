@@ -127,6 +127,9 @@
 								<h:commandButton accesskey="r" value="Registrieren"
 									action="#{registerController.register}" />
 							</div>
+							<div class="message">
+								<h:message for="registerController" showDetail="true" />
+							</div>
 						</h:form>
 					</div>
 				</div>
