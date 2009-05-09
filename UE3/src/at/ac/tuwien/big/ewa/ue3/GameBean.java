@@ -108,6 +108,80 @@ public class GameBean {
 		return game;
 	}
 
+	public Player getPlayer() {
+		return (Player) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("playerBean");
+	}
+
+	public String getPlayerCardOne() {
+		if (game.getPlayersCards().size() < 1) return "unknown";
+
+		return getTextFromCard(game.getPlayersCards().get(0));
+	}
+
+	public String getPlayerCardOnePicture() {
+		if (game.getPlayersCards().size() < 1) return "img/deck/bg.png";
+
+		return getImgPathFromCard(game.getPlayersCards().get(0));
+	}
+
+	public String getPlayerCardTwo() {
+		if (game.getPlayersCards().size() < 2) return "unknown";
+
+		return getTextFromCard(game.getPlayersCards().get(1));
+	}
+
+	public String getPlayerCardTwoPicture() {
+		if (game.getPlayersCards().size() < 2) return "img/deck/bg.png";
+
+		return getImgPathFromCard(game.getPlayersCards().get(1));
+	}
+
+	public String getPlayersHandRank() {
+		return getHandRankString(game.getShowdownResult().getPlayersHandRank());
+	}
+
+	public Collection<Action> getPossibleActions() {
+		return game.getPossibleActions();
+	}
+
+	public String getPotSize() {
+		return game.getPotSize() + "";
+	}
+
+	public String getRiverCard() {
+		if (game.getTurnCard() != null) return getTextFromCard(game.getRiverCard());
+		return getTextFromCard(null);
+	}
+
+	public String getRiverCardPicture() {
+		if (game.getTurnCard() != null) return getImgPathFromCard(game.getRiverCard());
+		return getImgPathFromCard(null);
+	}
+
+	public String getStack() {
+		return game.getPlayer().getStack() + "";
+	}
+
+	public String getTurnCard() {
+		if (game.getTurnCard() != null) return getTextFromCard(game.getTurnCard());
+		return getTextFromCard(null);
+	}
+
+	public String getTurnCardPicture() {
+		if (game.getTurnCard() != null) return getImgPathFromCard(game.getTurnCard());
+		return getImgPathFromCard(null);
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public void setPlayer(Player player) {
+		// this.player = player;
+		//
+		// game = new Game(player, GameBean.DEFAULT_BET_SIZE);
+	}
+
 	private String getHandRankString(HandRank handRank) {
 		String s = "";
 
@@ -201,46 +275,6 @@ public class GameBean {
 		}
 	}
 
-	public Player getPlayer() {
-		return (Player) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("playerBean");
-	}
-
-	public String getPlayerCardOne() {
-		if (game.getPlayersCards().size() < 1) return "unknown";
-
-		return getTextFromCard(game.getPlayersCards().get(0));
-	}
-
-	public String getPlayerCardOnePicture() {
-		if (game.getPlayersCards().size() < 1) return "img/deck/bg.png";
-
-		return getImgPathFromCard(game.getPlayersCards().get(0));
-	}
-
-	public String getPlayerCardTwo() {
-		if (game.getPlayersCards().size() < 2) return "unknown";
-
-		return getTextFromCard(game.getPlayersCards().get(1));
-	}
-
-	public String getPlayerCardTwoPicture() {
-		if (game.getPlayersCards().size() < 2) return "img/deck/bg.png";
-
-		return getImgPathFromCard(game.getPlayersCards().get(1));
-	}
-
-	public String getPlayersHandRank() {
-		return getHandRankString(game.getShowdownResult().getPlayersHandRank());
-	}
-
-	public Collection<Action> getPossibleActions() {
-		return game.getPossibleActions();
-	}
-
-	public String getPotSize() {
-		return game.getPotSize() + "";
-	}
-
 	private String getRankString(Card card) {
 		String rank = card.getRank().toString();
 		switch (card.getRank()) {
@@ -258,20 +292,6 @@ public class GameBean {
 			break;
 		}
 		return rank;
-	}
-
-	public String getRiverCard() {
-		if (game.getTurnCard() != null) return getTextFromCard(game.getRiverCard());
-		return getTextFromCard(null);
-	}
-
-	public String getRiverCardPicture() {
-		if (game.getTurnCard() != null) return getImgPathFromCard(game.getRiverCard());
-		return getImgPathFromCard(null);
-	}
-
-	public String getStack() {
-		return game.getPlayer().getStack() + "";
 	}
 
 	private String getSuitString(Card card) {
@@ -298,21 +318,5 @@ public class GameBean {
 			return "unknown";
 		else
 			return getRankString(card) + " of " + getSuitString(card);
-	}
-
-	public String getTurnCard() {
-		if (game.getTurnCard() != null) return getTextFromCard(game.getTurnCard());
-		return getTextFromCard(null);
-	}
-
-	public String getTurnCardPicture() {
-		if (game.getTurnCard() != null) return getImgPathFromCard(game.getTurnCard());
-		return getImgPathFromCard(null);
-	}
-
-	public void setPlayer(Player player) {
-		// this.player = player;
-		//
-		// game = new Game(player, GameBean.DEFAULT_BET_SIZE);
 	}
 }
