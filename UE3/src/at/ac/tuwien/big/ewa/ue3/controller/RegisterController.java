@@ -1,5 +1,7 @@
 package at.ac.tuwien.big.ewa.ue3.controller;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import at.ac.tuwien.big.easyholdem.player.Player;
@@ -29,10 +31,18 @@ public class RegisterController extends ForwardToWelcomeControllerBase {
 		try {
 			Constants.playerDao.persist(getRequestPlayer());
 
-			if (getRequestPlayer().getId() == 0) return RegisterController.FAIL;
+			if (getRequestPlayer().getId() == 0) {
+				FacesContext.getCurrentInstance().addMessage("registerController",
+				        new FacesMessage("Neuer Benutzer konnte nicht gespeichert werden."));
+
+				return RegisterController.FAIL;
+			}
 
 			return RegisterController.SUCCESS;
 		} catch (final Exception e) {
+			FacesContext.getCurrentInstance().addMessage("registerController",
+			        new FacesMessage("Neuer Benutzer konnte nicht gespeichert werden.", e.getMessage()));
+
 			return RegisterController.FAIL;
 		}
 	}
