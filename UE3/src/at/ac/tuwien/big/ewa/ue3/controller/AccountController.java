@@ -1,17 +1,18 @@
 package at.ac.tuwien.big.ewa.ue3.controller;
 
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import at.ac.tuwien.big.easyholdem.player.Player;
 import at.ac.tuwien.big.ewa.ue3.Constants;
 
-public class RegisterController extends ForwardToWelcomeControllerBase {
-
-	private static final String FAIL = "fail";
-
-	private static final String SUCCESS = "success";
+public class AccountController extends LogoutControllerBase {
 
 	private final UserdataControllerBase userdataController = new UserdataControllerBase();
+
+	public String cancel() {
+		return "cancel";
+	}
 
 	public SelectItem[] getGenders() {
 		return userdataController.getGenders();
@@ -25,16 +26,17 @@ public class RegisterController extends ForwardToWelcomeControllerBase {
 		return userdataController.getRequiredMessage();
 	}
 
-	public String register() {
-		try {
-			Constants.playerDao.persist(getRequestPlayer());
+	public String save() {
+		final Player playerBean = (Player) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get(
+		        "playerBean");
 
-			if (getRequestPlayer().getId() == 0) return RegisterController.FAIL;
+		playerBean.setStack(player.getStack());
 
-			return RegisterController.SUCCESS;
-		} catch (final Exception e) {
-			return RegisterController.FAIL;
-		}
+		if (player.getPassword().length() > 8) playerBean.setPassword(getRequestPlayer().getPassword());
+
+		Constants.playerDao.update(playerBean);
+
+		return "save";
 	}
 
 	public void setRequestPlayer(Player requestPlayer) {

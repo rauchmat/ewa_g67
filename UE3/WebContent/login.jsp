@@ -70,11 +70,6 @@
 								<h:commandButton accesskey="l" value="Einloggen"
 									action="#{loginController.login}" />
 							</div>
-							
-							<h3>Fehler</h3>
-							<p>
-								<h:message for="#{loginController}"></h:message>
-							</p>
 						</h:form>
 					</div>
 				</div>

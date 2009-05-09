@@ -2,12 +2,9 @@ package at.ac.tuwien.big.ewa.ue3.controller;
 
 import at.ac.tuwien.big.easyholdem.player.Player;
 
-public class WelcomeController extends LogoutControllerBase {
-	private Player player;
+public class PlayerControllerBase {
 
-	public String account() {
-		return "account";
-	}
+	protected Player player;
 
 	public Player getPlayer() {
 		return player;
@@ -15,10 +12,6 @@ public class WelcomeController extends LogoutControllerBase {
 
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-
-	public String table() {
-		return "table";
 	}
 
 }

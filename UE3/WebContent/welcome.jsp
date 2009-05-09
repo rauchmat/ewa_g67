@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/screen.css"/>
 	</head>
 	<body>
-		<f:view>
+		<f:view beforePhase="#{welcomeController.beforePhase}">
 			<ul class="accessibility">
 				<li><a href="#content" accesskey="0">Registrierungs-Formular</a></li>
 				<li><a href="#navigation" accesskey="1">Navigation</a></li>
@@ -40,15 +40,13 @@
 						</div>
 						<hr class="accessibility" />
 						<div id="main">
-							<form method="post" action="#">
-		                        <div id="navigation">
-		                            <ul>
-		                                <li><h:commandButton id="table" accesskey="t" action="#{welcomeController.table}">Zum Pokertisch</h:commandButton></li>
-		                                <li><h:commandButton id="account" accesskey="d" action="#{welcomeController.account}">Daten &auml;ndern</h:commandButton></li>
-		                                <li><h:commandButton id="logout" accesskey="l" action="#{welcomeController.logout}">Logout</h:commandButton></li>
-		                            </ul>
-		                        </div>
-		                    </form>
+	                        <div id="navigation">
+	                            <ul>
+	                                <li><h:commandButton id="table" accesskey="t" action="#{welcomeController.table}" value="Zum Pokertisch"/></li>
+	                                <li><h:commandButton id="account" accesskey="d" action="#{welcomeController.account}" value="Daten ändern"/></li>
+	                                <li><h:commandButton id="logout" accesskey="l" action="#{welcomeController.logout}" value="Logout"/></li>
+	                            </ul>
+	                        </div>
 		                    <div id="content">
 								<h2>Willkommen</h2>
 								<p>beim "Entwicklung von Web-Anwendungen" Easy-Holdem-Poker.</p>

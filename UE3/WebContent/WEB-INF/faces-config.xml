@@ -3,12 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
 	version="1.2">
 	<managed-bean>
-		<managed-bean-name>indexController</managed-bean-name>
-		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.IndexController</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>welcomeConroller</managed-bean-name>
+		<managed-bean-name>welcomeController</managed-bean-name>
 		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.WelcomeController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
@@ -24,6 +19,11 @@
 			<property-name>player</property-name>
 			<value>#{playerBean}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>requestPlayer</property-name>
+			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
+			<value></value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>loginController</managed-bean-name>
@@ -35,13 +35,58 @@
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>registerPlayerBean</managed-bean-name>
+		<managed-bean-name>requestPlayerBean</managed-bean-name>
 		<managed-bean-class>at.ac.tuwien.big.easyholdem.player.Player</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>playerBean</managed-bean-name>
 		<managed-bean-class>at.ac.tuwien.big.easyholdem.player.Player</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>id</property-name>
+			<value>0</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>accountController</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.AccountController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>player</property-name>
+			<value>#{playerBean}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>requestPlayer</property-name>
+			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
+			<value></value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>indexController</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.IndexController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>player</property-name>
+			<value>#{playerBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>tableController</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.controller.TableController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>player</property-name>
+			<value>#{playerBean}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>game</property-name>
+			<value>#{gameBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>gameBean</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.GameBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
@@ -50,10 +95,12 @@
 		<navigation-case>
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>register</from-outcome>
 			<to-view-id>/register.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -62,10 +109,7 @@
 		<navigation-case>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/login.jsp</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>fail</from-outcome>
-			<to-view-id>/register-failed.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -74,6 +118,7 @@
 		<navigation-case>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/welcome.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -82,14 +127,17 @@
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>table</from-outcome>
 			<to-view-id>/table.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>account</from-outcome>
 			<to-view-id>/account.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -98,6 +146,7 @@
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -106,6 +155,7 @@
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -130,6 +180,7 @@
 		<navigation-case>
 			<from-outcome>leave</from-outcome>
 			<to-view-id>/welcome.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -138,6 +189,7 @@
 		<navigation-case>
 			<from-outcome>save</from-outcome>
 			<to-view-id>/welcome.jsp</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -146,6 +198,15 @@
 		<navigation-case>
 			<from-outcome>cancel</from-outcome>
 			<to-view-id>/welcome.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>register</display-name>
+		<from-view-id>/register.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>fail</from-outcome>
+			<to-view-id>/register.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<validator>

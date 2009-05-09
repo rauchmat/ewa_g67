@@ -1,35 +1,35 @@
 package at.ac.tuwien.big.ewa.ue3.controller;
 
-import java.io.IOException;
-
-import javax.faces.event.PhaseEvent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import at.ac.tuwien.big.easyholdem.player.Player;
 import at.ac.tuwien.big.ewa.ue3.Constants;
 
-public class LoginController {
-
-	protected Player player;
-
-	public void beforePhase(PhaseEvent phase) {
-		if (player != null && player.getId() != 0) try {
-			phase.getFacesContext().getExternalContext().redirect("welcome.jsp");
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
+public class LoginController extends ForwardToWelcomeControllerBase {
 
 	public String login() {
 		final Player serverPlayer = Constants.playerDao.getPlayerByUsername(player.getUserName());
 
-		if (serverPlayer == null) return "failUser";
+		if (serverPlayer == null) {
+			final FacesContext context = FacesContext.getCurrentInstance();
 
-		if (!player.getPassword().equals(serverPlayer.getPassword())) return "failPassword";
+			context.addMessage("sendeLogin:username", new FacesMessage("Ungültiger Username."));
 
+			return "failUser";
+		}
+
+		if (!player.getPassword().equals(serverPlayer.getPassword())) {
+			final FacesContext context = FacesContext.getCurrentInstance();
+
+			context.addMessage("sendeLogin:password", new FacesMessage("Ungültiges Passwort."));
+
+			return "failPassword";
+		}
+
+		final FacesContext ctx = FacesContext.getCurrentInstance();
+
+		final Player player = (Player) ctx.getExternalContext().getSessionMap().get("playerBean");
 		player.setDateOfBirth(serverPlayer.getDateOfBirth());
 		player.setFirstName(serverPlayer.getFirstName());
 		player.setGender(serverPlayer.getGender());
@@ -40,10 +40,6 @@ public class LoginController {
 		player.setUserName(serverPlayer.getUserName());
 
 		return "success";
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 }

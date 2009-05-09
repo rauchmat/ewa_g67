@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/screen.css"/>
 	</head>
 	<body>
-	<f:view>
+	<f:view beforePhase="#{indexController.beforePhase}">
 			<div id="wrapper">
 				<div id="header">
 					<div id="teaser">
@@ -27,16 +27,16 @@
 					<div id="infoborder"><p>Sie sind nicht eingeloggt.</p></div>
 	                <div id="sidebar">
 	                    <ul id="navigation">
-							<li xml:lang="en"><a accesskey="l" href="faces/login.jsp">Login</a></li>
-							<li><a accesskey="r" href="faces/register.jsp">Registrieren</a></li>
+							<li xml:lang="en"><a accesskey="l" href="login.jsp">Login</a></li>
+							<li><a accesskey="r" href="register.jsp">Registrieren</a></li>
 						</ul>
 					</div>
 	                <hr class="accessibility" />
 					<div id="content">
 	                    <h2>Willkommen</h2>
 	                    <p>Herzlich willkommen beim <abbr title="Entwicklung von Web-Anwendungen">EWA</abbr> Poker Spiel.</p>
-	                    <p>Um ein Spiel zu starten, m&uuml;ssen Sie sich <a href="faces/login.jsp">einloggen</a>.</p>
-	                    <p>Falls Sie noch keinen Benutzeraccount haben, k&ouml;nnen Sie sich <a href="faces/register.jsp">registrieren</a>.</p>
+	                    <p>Um ein Spiel zu starten, m&uuml;ssen Sie sich <a href="login.jsp">einloggen</a>.</p>
+	                    <p>Falls Sie noch keinen Benutzeraccount haben, k&ouml;nnen Sie sich <a href="register.jsp">registrieren</a>.</p>
 	                </div>
 	            </div>
 	            <div id="footer">

@@ -50,7 +50,7 @@
 								<div>
 									<h:outputLabel for="firstname">Vorname</h:outputLabel>
 									<h:inputText id="firstname" label="Vorname" required="true"
-										value="#{registerPlayerBean.firstName}"
+										value="#{requestPlayerBean.firstName}"
 										requiredMessage="#{registerController.requiredMessage}" />
 									<div class="message"><h:message for="firstname" /></div>
 								</div>
@@ -59,7 +59,7 @@
 									<h:outputLabel for="lastname">Nachname</h:outputLabel>
 									<h:inputText id="lastname" label="Nachname" required="true"
 										requiredMessage="#{registerController.requiredMessage}"
-										value="#{registerPlayerBean.lastName}" />
+										value="#{requestPlayerBean.lastName}" />
 									<div class="message"><h:message for="lastname" /></div>
 								</div>
 								
@@ -67,7 +67,7 @@
 									<h:outputLabel for="dateofbirth">Geburtsdatum</h:outputLabel>
 									<h:inputText id="dateofbirth" label="Geburtsdatum"
 										required="true" requiredMessage="#{registerController.requiredMessage}"
-										value="#{registerPlayerBean.dateOfBirth}" >
+										value="#{requestPlayerBean.dateOfBirth}" >
 										<f:convertDateTime type="date" pattern="dd.MM.yyyy" dateStyle="short" />
 									</h:inputText>
 									<div class="message"><h:message for="dateofbirth" /></div>
@@ -75,7 +75,7 @@
 								
 								<div>
       				                <h:outputLabel for="sex">Geschlecht</h:outputLabel>
-      				                <h:selectOneMenu id="sex" required="true" value="#{registerPlayerBean.gender}" 
+      				                <h:selectOneMenu id="sex" required="true" value="#{requestPlayerBean.gender}" 
       				                	requiredMessage="#{registerController.requiredMessage}" converter="GenderConverter">
       				                	<f:selectItems value="#{registerController.genders}" />
 									</h:selectOneMenu>
@@ -93,7 +93,7 @@
 									<div>
 										<h:outputLabel for="username">Username</h:outputLabel>
 										<h:inputText id="username" label="Username" required="true"
-											value="#{registerPlayerBean.userName}"
+											value="#{requestPlayerBean.userName}"
 											requiredMessage="#{registerController.requiredMessage}">
 											<f:validator validatorId="UsernameValidator"/>
 										</h:inputText>
@@ -103,7 +103,7 @@
 									<div>
 										<h:outputLabel for="password">Passwort</h:outputLabel>
 										<h:inputSecret id="password" label="Passwort" required="true"
-											value="#{registerPlayerBean.password}"
+											value="#{requestPlayerBean.password}"
 											requiredMessage="#{registerController.requiredMessage}">
 											<f:validateLength minimum="8" />
 										</h:inputSecret>
@@ -114,7 +114,7 @@
 										<h:outputLabel for="stack">Gr&ouml;&szlig;e des
 											<span xml:lang="en">Stack</span></h:outputLabel>
 										<h:inputText id="stack" label="Größe des Stack" required="true"
-											value="#{registerPlayerBean.stack}"
+											value="#{requestPlayerBean.stack}"
 											requiredMessage="#{registerController.requiredMessage}">
 											<f:convertNumber />
 										</h:inputText>
