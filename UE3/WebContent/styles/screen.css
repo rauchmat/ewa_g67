@@ -280,11 +280,12 @@ fieldset {
   clear:both;
 }
 
-.formblock message {
+errorMessage {
+	color: red;
+}
+
+.formblock .message {
   float:left;
-  display:block;
-  width: 9em;
-  height: 1.5em;
-  margin: 0.5em 0 0.5em 0;
-  clear:both;
+  margin: 0.5em 1em;
+  color: red;
 }
