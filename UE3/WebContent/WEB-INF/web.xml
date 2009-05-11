@@ -2,6 +2,14 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
+	<context-param>
+        <description>
+            Do not render the "javax.jsf.ViewState" id attribute for
+            view state hidden inputs. Necessary for valid XHTML on multiple forms on one page.
+        </description>
+        <param-name>org.apache.myfaces.RENDER_VIEWSTATE_ID</param-name>
+        <param-value>false</param-value>
+    </context-param>
 	<display-name>UE3</display-name>
 	<welcome-file-list>
 		<welcome-file>/WEB-INF/default.jsp</welcome-file>

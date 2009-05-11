@@ -16,8 +16,8 @@ public class UsernameValidator implements Validator {
 
 		if (enteredUsername.length() == 0) {
 			final FacesMessage message = new FacesMessage();
-			message.setDetail("Empty usernames not allowed");
-			message.setSummary("Username not valid");
+			message.setDetail("Leere Benutzernamen sind nicht erlaubt.");
+			message.setSummary("Benutzername nicht korrekt.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}
@@ -26,8 +26,8 @@ public class UsernameValidator implements Validator {
 
 		if (p != null) {
 			final FacesMessage message = new FacesMessage();
-			message.setDetail("A user with that name already exists.");
-			message.setSummary("Username not valid");
+			message.setDetail("Ein Benutzer mit diesem Benutzernamen existiert bereits.");
+			message.setSummary("Benutzername nicht korrekt.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}

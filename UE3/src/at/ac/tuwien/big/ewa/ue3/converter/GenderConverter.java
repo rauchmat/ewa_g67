@@ -15,8 +15,8 @@ public class GenderConverter implements Converter {
 			return Enum.valueOf(Gender.class, value);
 		} catch (final Exception e) {
 			final FacesMessage message = new FacesMessage();
-			message.setDetail(e.getMessage());
-			message.setSummary("Gender is missing or not valid");
+			message.setDetail("Das Geschlecht konnte nicht konvertiert werden.");
+			message.setSummary("Das Geschlecht fehlt oder kann nicht gelesen werden.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ConverterException(message);
 		}

@@ -23,8 +23,8 @@ public class PasswordValidator implements Validator {
 
 		if (p == null) {
 			final FacesMessage message = new FacesMessage();
-			message.setDetail("User object not valid");
-			message.setSummary("User object not valid");
+			message.setDetail("Benutzerobjekt nicht gefunden.");
+			message.setSummary("Benutzerobjekt nicht gefunden.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}
@@ -35,8 +35,8 @@ public class PasswordValidator implements Validator {
 
 		if (p == null) {
 			final FacesMessage message = new FacesMessage();
-			message.setDetail("Username not valid");
-			message.setSummary("Username not valid");
+			message.setDetail("Benutzername nicht korrekt.");
+			message.setSummary("Benutzername nicht korrekt.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}
@@ -47,8 +47,8 @@ public class PasswordValidator implements Validator {
 
 		if (!enteredPassword.equals(p.getPassword())) {
 			final FacesMessage message = new FacesMessage();
-			message.setDetail("Password not valid");
-			message.setSummary("Password not valid");
+			message.setDetail("Passwort nicht korrekt.");
+			message.setSummary("Password nicht korrekt.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(message);
 		}

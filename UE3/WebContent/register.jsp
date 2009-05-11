@@ -67,8 +67,9 @@
 									<h:outputLabel for="dateofbirth">Geburtsdatum</h:outputLabel>
 									<h:inputText id="dateofbirth" label="Geburtsdatum"
 										required="true" requiredMessage="#{registerController.requiredMessage}"
-										value="#{requestPlayerBean.dateOfBirth}" >
-										<f:convertDateTime type="date" pattern="dd.MM.yyyy" dateStyle="short" />
+										value="#{requestPlayerBean.dateOfBirth}"
+										converterMessage="Das Datum konnte nicht konvertiert werden. Beispiel 11.05.2009." >
+										<f:convertDateTime type="date" pattern="dd.MM.yyyy" dateStyle="short"/>
 									</h:inputText>
 									<div class="message"><h:message for="dateofbirth" /></div>
 								</div>
