@@ -30,49 +30,49 @@
 						<h2><h:outputText value="#{msg.register_heading}"/></h2>
 						<h:outputText rendered="#{!loginController.loggedIn}">
 						<i:form id="registerForm">
-							<h:messages/>
+							<i:messages/>
 							<h:panelGrid columns="3">
 
 								<h:outputLabel value="#{msg.register_lbl_firstname}" for="firstName"/>
-								<h:inputText value="#{registerController.regPlayer.firstName}" id="firstName" required="true"/>
-								<h:message for="firstName"/>
+								<i:inputText value="#{registerController.regPlayer.firstName}" id="firstName" required="true" partialSubmit="true"/>
+								<i:message for="firstName"/>
 								
 								<h:outputLabel value="#{msg.register_lbl_lastname}" for="lastName"/>
-								<h:inputText value="#{registerController.regPlayer.lastName}" id="lastName" required="true"/>
-								<h:message for="lastName"/>
+								<i:inputText value="#{registerController.regPlayer.lastName}" id="lastName" required="true" partialSubmit="true"/>
+								<i:message for="lastName"/>
 								
 								<h:outputLabel value="#{msg.register_lbl_gender}" for="gender"/>
-								<h:selectOneMenu value="#{registerController.regGender}" id ="gender" required="true">
+								<i:selectOneMenu value="#{registerController.regGender}" id ="gender" required="true" partialSubmit="true">
 									<f:selectItem itemLabel="#{msg.register_male}" itemValue="m"/>
 									<f:selectItem itemLabel="#{msg.register_female}" itemValue="w"/>
-								</h:selectOneMenu>
-								<h:message for="gender"/>
+								</i:selectOneMenu>
+								<i:message for="gender"/>
 								
 								<h:outputLabel value="#{msg.register_lbl_dateOfBirth}" for="dateOfBirth" />
 								<i:selectInputDate id="dateOfBirth" value="#{registerController.regPlayer.dateOfBirth}" renderAsPopup="true"
 									renderMonthAsDropdown="true" renderYearAsDropdown="true" popupDateFormat="dd.MM.yyyy"
-									title="#{msg.register_lbl_dateOfBirth}">v
+									title="#{msg.register_lbl_dateOfBirth}" partialSubmit="true">
 									<f:convertDateTime pattern="dd.MM.yyyy" />
 								</i:selectInputDate>
-							  	<h:message for="dateOfBirth" />
+							  	<i:message for="dateOfBirth" />
 							  	
 							  	<h:outputLabel value="#{msg.register_lbl_stack}" for="stack"/>
-								<h:inputText value="#{registerController.regPlayer.stack}" id ="stack" required="true">
+								<i:inputText value="#{registerController.regPlayer.stack}" id ="stack" required="true" partialSubmit="true">
 									<f:validateLongRange minimum="100" maximum="10000"/>
-								</h:inputText>
-								<h:message for="stack"/>
+								</i:inputText>
+								<i:message for="stack"/>
 								
 								<h:outputLabel value="#{msg.register_lbl_username}" for="userName"/>
-								<h:inputText value="#{registerController.regPlayer.userName}" id="userName" required="true">
+								<i:inputText value="#{registerController.regPlayer.userName}" id="userName" required="true" partialSubmit="true" validator="#{registerController.validateUsername}">
 									<f:validateLength minimum="6"/>
-								</h:inputText>
-								<h:message for="userName" />
+								</i:inputText>
+								<i:message for="userName" />
 								
 								<h:outputLabel value="#{msg.register_lbl_pwd}" for="password"/>
-								<h:inputSecret value="#{registerController.regPlayer.password}" id="password" required="true">
+								<i:inputSecret value="#{registerController.regPlayer.password}" id="password" required="true" partialSubmit="true">
 									<f:validateLength minimum="6"/>
-								</h:inputSecret>
-								<h:message for="password"/>
+								</i:inputSecret>
+								<i:message for="password" showDetail="false"/>
 								
 							</h:panelGrid>
 							<i:commandButton action="#{registerController.register}" value="#{msg.register_btn}"/>

@@ -1,6 +1,7 @@
 package at.ac.tuwien.big.ewa.ue3.web;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
 import at.ac.tuwien.big.easyholdem.player.Player;
@@ -180,6 +181,15 @@ public class RegisterController {
 	 */
 	public void setRegPlayer(Player regPlayer) {
 		this.regPlayer = regPlayer;
+	}
+
+	public void validateUsername(FacesContext context, UIComponent validate, Object value) {
+		final String username = (String) value;
+
+		final Player p = playerDAO.getPlayerByUsername(username);
+		if (p != null && p.getUserName().equals(username))
+		    context.addMessage(validate.getClientId(context), new FacesMessage(
+		            "Benutzername ist leider schon vergeben."));
 	}
 
 }
