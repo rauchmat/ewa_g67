@@ -117,10 +117,17 @@
                                 </i:outputText>
                                 <div id="news">
                                     <ul>
-                                        <li>+++ Neues Turnier am 23. Juni 1983 +++</li>
+                                        <li>
+                                        	<i:outputText rendered="#{newsController.newsAvailable}">
+	                                        	<i:outputText value="#{newsController.dateString}"/>:
+	                                        	<i:outputText value="#{newsController.description}" escape="false" />
+	                                        	[<i:outputLink value="#{newsController.link}">mehr</i:outputLink>]
+                                        	</i:outputText>
+                                        </li>
                                     </ul>
                                 </div>
                             </i:outputText>
+                            
                             <i:outputText rendered="#{!loginController.loggedIn}">
                                 <p><i:outputText value="#{msg.not_logged_in}" /></p>
                             </i:outputText>

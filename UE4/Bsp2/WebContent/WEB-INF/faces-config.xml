@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
 	version="1.2">
+	<!-- application>
+		<view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
+	</application-->
+	<managed-bean>
+		<managed-bean-name>renderer</managed-bean-name>
+		<managed-bean-class>com.icesoft.faces.async.render.OnDemandRenderer</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>newsPoller</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.NewsPoller</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+		<managed-property>
+			<property-name>renderer</property-name>
+			<property-class>com.icesoft.faces.async.render.OnDemandRenderer</property-class>
+			<value>#{renderer}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>newsController</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.web.NewsController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>renderer</property-name>
+			<property-class>com.icesoft.faces.async.render.OnDemandRenderer</property-class>
+			<value>#{renderer}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>newsPoller</property-name>
+			<property-class>at.ac.tuwien.big.ewa.ue3.NewsPoller</property-class>
+			<value>#{newsPoller}</value>
+		</managed-property>
+	</managed-bean>
 	<managed-bean>
 		<description>The currently logged in player.</description>
 		<managed-bean-name>player</managed-bean-name>
-		<managed-bean-class>
-			at.ac.tuwien.big.easyholdem.player.Player
-		</managed-bean-class>
+		<managed-bean-class>at.ac.tuwien.big.easyholdem.player.Player</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<description>The currently active game.</description>
 		<managed-bean-name>game</managed-bean-name>
-		<managed-bean-class>
-			at.ac.tuwien.big.easyholdem.game.Game
-		</managed-bean-class>
+		<managed-bean-class>at.ac.tuwien.big.easyholdem.game.Game</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
@@ -25,84 +53,62 @@
 			The application widely used player dao.
 		</description>
 		<managed-bean-name>playerDAO</managed-bean-name>
-		<managed-bean-class>
-			at.ac.tuwien.big.easyholdem.player.DerbyPlayerDAO
-		</managed-bean-class>
+		<managed-bean-class>at.ac.tuwien.big.easyholdem.player.DerbyPlayerDAO</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<description>Controls login requests.</description>
 		<managed-bean-name>loginController</managed-bean-name>
-		<managed-bean-class>
-			at.ac.tuwien.big.ewa.ue3.web.LoginController
-		</managed-bean-class>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.web.LoginController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>playerDAO</property-name>
-			<property-class>
-				at.ac.tuwien.big.easyholdem.player.PlayerDAO
-			</property-class>
+			<property-class>at.ac.tuwien.big.easyholdem.player.PlayerDAO</property-class>
 			<value>#{playerDAO}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>loggedInPlayer</property-name>
-			<property-class>
-				at.ac.tuwien.big.easyholdem.player.Player
-			</property-class>
+			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
 			<value>#{player}</value>
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<description>Controls all register requests.</description>
 		<managed-bean-name>registerController</managed-bean-name>
-		<managed-bean-class>
-			at.ac.tuwien.big.ewa.ue3.web.RegisterController
-		</managed-bean-class>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.web.RegisterController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>playerDAO</property-name>
-			<property-class>
-				at.ac.tuwien.big.easyholdem.player.PlayerDAO
-			</property-class>
+			<property-class>at.ac.tuwien.big.easyholdem.player.PlayerDAO</property-class>
 			<value>#{playerDAO}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>loggedInPlayer</property-name>
-			<property-class>
-				at.ac.tuwien.big.easyholdem.player.Player
-			</property-class>
+			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
 			<value>#{player}</value>
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<description>Controls game requests.</description>
 		<managed-bean-name>gameController</managed-bean-name>
-		<managed-bean-class>
-			at.ac.tuwien.big.ewa.ue3.web.GameController
-		</managed-bean-class>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.web.GameController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>game</property-name>
-			<property-class>
-				at.ac.tuwien.big.easyholdem.game.Game
-			</property-class>
+			<property-class>at.ac.tuwien.big.easyholdem.game.Game</property-class>
 			<value>#{game}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>
-			loggedInPlayer</property-name>
-			<property-class>
-			at.ac.tuwien.big.easyholdem.player.Player</property-class>
+			<property-name>loggedInPlayer</property-name>
+			<property-class>at.ac.tuwien.big.easyholdem.player.Player</property-class>
 			<value>
-			#{player}</value>
+				#{player}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>
-			playerDAO</property-name>
-			<property-class>
-			at.ac.tuwien.big.easyholdem.player.PlayerDAO</property-class>
+			<property-name>playerDAO</property-name>
+			<property-class>at.ac.tuwien.big.easyholdem.player.PlayerDAO</property-class>
 			<value>
-			#{playerDAO}</value>
+				#{playerDAO}</value>
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
@@ -129,7 +135,7 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-    <navigation-rule>
+	<navigation-rule>
 		<display-name>quitGame</display-name>
 		<navigation-case>
 			<from-action>#{gameController.quitGame}</from-action>
