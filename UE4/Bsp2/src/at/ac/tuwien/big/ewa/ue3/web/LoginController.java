@@ -7,23 +7,16 @@ import at.ac.tuwien.big.easyholdem.player.Player;
 import at.ac.tuwien.big.easyholdem.player.PlayerDAO;
 
 /**
- * Controller class handling all requests and actions concerning the login
- * process.
+ * Controller class handling all requests and actions concerning the login process.
  * 
  * @author Philip Langer
  */
 public class LoginController {
 
 	/**
-	 * Expression language expression representing the <code>player</code>
-	 * bean.
+	 * Expression language expression representing the <code>player</code> bean.
 	 */
 	private static final String EL_PLAYER = "#{player}";
-
-	/**
-	 * Return value indicating a successful completion of an action.
-	 */
-	private static final String SUCCESS = "success";
 
 	/**
 	 * Return value indicating a unsuccessful completion of an action.
@@ -31,14 +24,19 @@ public class LoginController {
 	private static final String FAIL = "fail";
 
 	/**
+	 * Return value indicating a successful completion of an action.
+	 */
+	private static final String SUCCESS = "success";
+
+	/**
 	 * The injected {@link Player} currently logged in.
 	 */
 	private Player loggedInPlayer;
 
 	/**
-	 * The injected {@link PlayerDAO} to use for persisting {@link Player}s.
+	 * The login user password field.
 	 */
-	private PlayerDAO playerDAO;
+	private String loginPassword;
 
 	/**
 	 * The login user name field.
@@ -46,9 +44,9 @@ public class LoginController {
 	private String loginUser;
 
 	/**
-	 * The login user password field.
+	 * The injected {@link PlayerDAO} to use for persisting {@link Player}s.
 	 */
-	private String loginPassword;
+	private PlayerDAO playerDAO;
 
 	/***************************************************************************
 	 * Managed property methods
@@ -64,14 +62,21 @@ public class LoginController {
 	}
 
 	/**
-	 * Sets the currently logged in player. This method is used to inject the
-	 * currently logged in {@link Player} bean.
+	 * Returns the password field value.
 	 * 
-	 * @param loggedInPlayer
-	 *            currently logged in {@link Player}.
+	 * @return the password field value.
 	 */
-	public void setLoggedInPlayer(Player loggedInPlayer) {
-		this.loggedInPlayer = loggedInPlayer;
+	public String getLoginPassword() {
+		return loginPassword;
+	}
+
+	/**
+	 * Returns the set user name field value.
+	 * 
+	 * @return user name field value.
+	 */
+	public String getLoginUser() {
+		return loginUser;
 	}
 
 	/**
@@ -82,33 +87,40 @@ public class LoginController {
 	public PlayerDAO getPlayerDAO() {
 		return playerDAO;
 	}
-	
-	/**
-	 * Sets the {@link PlayerDAO}. This method is used to inject the
-	 * {@link PlayerDAO}.
-	 * 
-	 * @param playerDAO
-	 *            to set.
-	 */
-	public void setPlayerDAO(PlayerDAO playerDAO) {
-		this.playerDAO = playerDAO;
-	}
 
 	/***************************************************************************
 	 * Methods invoked by pages
 	 **************************************************************************/
 
 	/**
-	 * Returns <code>true</code> if in the current session there is a user
-	 * currently logged in. <code>false</code> otherwise.
+	 * Returns <code>true</code> if in the current session there is a user currently logged in. <code>false</code>
+	 * otherwise.
 	 * 
 	 * @return <code>true</code> if logged in. <code>false</code> otherwise.
 	 */
 	public boolean isLoggedIn() {
-		if (loggedInPlayer != null && loggedInPlayer.getUserName() != null) {
-			return true;
-		}
+		if (loggedInPlayer != null && loggedInPlayer.getUserName() != null) return true;
 		return false;
+	}
+
+	/**
+	 * Logs in the user identified by the user name field and password field.
+	 * 
+	 * @return &quot;success&quot; if the authentication was successful. &quot;fail&quot; otherwise.
+	 */
+	public String login() {
+		final FacesContext context = FacesContext.getCurrentInstance();
+		final Player p = playerDAO.getPlayerByUsername(loginUser);
+		if (p != null && p.getPassword().equals(loginPassword)) {
+			loggedInPlayer = p;
+			context.getApplication().getExpressionFactory().createValueExpression(context.getELContext(),
+			        LoginController.EL_PLAYER, Player.class).setValue(context.getELContext(), p);
+			return LoginController.SUCCESS;
+		} else {
+			loggedInPlayer = null;
+			context.addMessage(null, new FacesMessage("Login fehlgeschlagen."));
+			return LoginController.FAIL;
+		}
 	}
 
 	/**
@@ -117,42 +129,30 @@ public class LoginController {
 	 * @return Returns &quot;success&quot; always.
 	 */
 	public String logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getApplication().getExpressionFactory().createValueExpression(
-				context.getELContext(), EL_PLAYER, Player.class).setValue(
-				context.getELContext(), null);
-		return SUCCESS;
+		final FacesContext context = FacesContext.getCurrentInstance();
+		context.getApplication().getExpressionFactory().createValueExpression(context.getELContext(),
+		        LoginController.EL_PLAYER, Player.class).setValue(context.getELContext(), null);
+		return LoginController.SUCCESS;
 	}
 
 	/**
-	 * Logs in the user identified by the user name field and password field.
+	 * Sets the currently logged in player. This method is used to inject the currently logged in {@link Player} bean.
 	 * 
-	 * @return &quot;success&quot; if the authentication was successful.
-	 *         &quot;fail&quot; otherwise.
+	 * @param loggedInPlayer
+	 *            currently logged in {@link Player}.
 	 */
-	public String login() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Player p = playerDAO.getPlayerByUsername(loginUser);
-		if (p != null && p.getPassword().equals(loginPassword)) {
-			this.loggedInPlayer = p;
-			context.getApplication().getExpressionFactory()
-					.createValueExpression(context.getELContext(), EL_PLAYER,
-							Player.class).setValue(context.getELContext(), p);
-			return SUCCESS;
-		} else {
-			this.loggedInPlayer = null;
-			context.addMessage(null, new FacesMessage("Login fehlgeschlagen."));
-			return FAIL;
-		}
+	public void setLoggedInPlayer(Player loggedInPlayer) {
+		this.loggedInPlayer = loggedInPlayer;
 	}
 
 	/**
-	 * Returns the set user name field value.
+	 * Sets the password field value.
 	 * 
-	 * @return user name field value.
+	 * @param loginPassword
+	 *            the password field value.
 	 */
-	public String getLoginUser() {
-		return loginUser;
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword;
 	}
 
 	/**
@@ -166,22 +166,13 @@ public class LoginController {
 	}
 
 	/**
-	 * Returns the password field value.
+	 * Sets the {@link PlayerDAO}. This method is used to inject the {@link PlayerDAO}.
 	 * 
-	 * @return the password field value.
+	 * @param playerDAO
+	 *            to set.
 	 */
-	public String getLoginPassword() {
-		return loginPassword;
-	}
-
-	/**
-	 * Sets the password field value.
-	 * 
-	 * @param loginPassword
-	 *            the password field value.
-	 */
-	public void setLoginPassword(String loginPassword) {
-		this.loginPassword = loginPassword;
+	public void setPlayerDAO(PlayerDAO playerDAO) {
+		this.playerDAO = playerDAO;
 	}
 
 }
