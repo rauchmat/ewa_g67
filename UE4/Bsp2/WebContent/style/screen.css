@@ -306,3 +306,7 @@ fieldset {
 form .iceMsgError {
 	color: #f00;
 }
+
+.iceMsgsError {
+	color: #f00;
+}

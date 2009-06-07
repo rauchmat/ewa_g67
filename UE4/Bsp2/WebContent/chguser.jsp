@@ -28,7 +28,7 @@
 					<div id="content">
 						<h2><i:outputText value="#{msg.chguser_heading}"/></h2>
 						<i:outputText rendered="#{loginController.loggedIn}">
-						<i:form id="chgStackForm">
+						<i:form id="chgStackForm" partialSubmit="true">
 							<i:messages/>
 							
 							<h3><i:outputText value="#{msg.chgstack_heading}"/></h3>
@@ -44,7 +44,7 @@
 
 						</i:form>
 						
-						<i:form id="chgPasswordForm">
+						<i:form id="chgPasswordForm" partialSubmit="true">
 							<h3><i:outputText value="#{msg.chgpwd_heading}"/></h3>
 							<i:panelGrid columns="3">
 								
