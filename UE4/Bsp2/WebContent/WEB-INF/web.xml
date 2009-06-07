@@ -5,8 +5,27 @@
 	<display-name>ewa09-ue4</display-name>
 
 	<welcome-file-list>
-		<welcome-file>index.iface</welcome-file>
+		<welcome-file>welcome.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<context-param>
+        <param-name>com.icesoft.faces.concurrentDOMViews</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
+    <!-- explicit asynchronous mode -->
+    <context-param>
+        <param-name>com.icesoft.faces.synchronousUpdate</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    
+    <listener> 
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class> 
+    </listener>
+    
+    <listener>
+    	<listener-class>com.icesoft.faces.util.event.servlet.ContextEventRepeater</listener-class>
+    </listener>
 
 	<context-param>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -30,7 +49,7 @@
 		<servlet-class>com.icesoft.faces.webapp.xmlhttp.BlockingServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
+	
 	<servlet-mapping>
 		<servlet-name>Persistent Faces Servlet</servlet-name>
 		<url-pattern>*.iface</url-pattern>
