@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<%@ taglib uri="http://www.icesoft.com/icefaces/component" prefix="i" %>
 
 <f:view>
 	<f:loadBundle basename="messages" var="msg" />
@@ -12,6 +13,7 @@
 		<meta name="language" content="de-AT"/>
 	    <title><h:outputText value="#{msg.app_title}"/></title>
 	    <link rel="stylesheet" type="text/css" href="./style/screen.css" />
+    	<link rel="stylesheet" type="text/css" href="./xmlhttp/css/xp/xp.css" />
 	  </head>
 	  <body>
 	       <div id="wrapper">
@@ -27,10 +29,10 @@
 					<div id="content">
 						<h2><h:outputText value="#{msg.register_heading}"/></h2>
 						<h:outputText rendered="#{!loginController.loggedIn}">
-						<h:form id="registerForm">
+						<i:form id="registerForm">
 							<h:messages/>
 							<h:panelGrid columns="3">
-							
+
 								<h:outputLabel value="#{msg.register_lbl_firstname}" for="firstName"/>
 								<h:inputText value="#{registerController.regPlayer.firstName}" id="firstName" required="true"/>
 								<h:message for="firstName"/>
@@ -40,16 +42,18 @@
 								<h:message for="lastName"/>
 								
 								<h:outputLabel value="#{msg.register_lbl_gender}" for="gender"/>
-								<h:selectOneListbox value="#{registerController.regGender}" id ="gender" required="true">
+								<h:selectOneMenu value="#{registerController.regGender}" id ="gender" required="true">
 									<f:selectItem itemLabel="#{msg.register_male}" itemValue="m"/>
 									<f:selectItem itemLabel="#{msg.register_female}" itemValue="w"/>
-								</h:selectOneListbox>
+								</h:selectOneMenu>
 								<h:message for="gender"/>
 								
-								<h:outputLabel value="#{msg.register_lbl_dateOfBirth}" for="dateOfBirth"/>
-								<h:inputText id="dateOfBirth" value="#{registerController.regPlayer.dateOfBirth}">
-							    	<f:convertDateTime pattern="dd.MM.yyyy"/>
-							  	</h:inputText>
+								<h:outputLabel value="#{msg.register_lbl_dateOfBirth}" for="dateOfBirth" />
+								<i:selectInputDate id="dateOfBirth" value="#{registerController.regPlayer.dateOfBirth}" renderAsPopup="true"
+									renderMonthAsDropdown="true" renderYearAsDropdown="true" popupDateFormat="dd.MM.yyyy"
+									title="#{msg.register_lbl_dateOfBirth}">v
+									<f:convertDateTime pattern="dd.MM.yyyy" />
+								</i:selectInputDate>
 							  	<h:message for="dateOfBirth" />
 							  	
 							  	<h:outputLabel value="#{msg.register_lbl_stack}" for="stack"/>
@@ -71,8 +75,8 @@
 								<h:message for="password"/>
 								
 							</h:panelGrid>
-							<h:commandButton action="#{registerController.register}" value="#{msg.register_btn}"/>
-						</h:form>
+							<i:commandButton action="#{registerController.register}" value="#{msg.register_btn}"/>
+						</i:form>
 						</h:outputText>
 						
 						<h:outputText rendered="#{loginController.loggedIn}">
