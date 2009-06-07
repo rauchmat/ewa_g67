@@ -11,7 +11,7 @@
         <meta name="description" content="Spielerdaten ändern beim EWA Poker Portals."/>
 		<meta name="keywords" content="Spielerdaten ändern EWA poker"/>
 		<meta name="language" content="de-AT"/>
-	    <title><i:outputText value="#{msg.app_title}"/></title>
+	    <title><i:outputText value="#{msg.app_title}" nospan="true"/></title>
 	    <link rel="stylesheet" type="text/css" href="./style/screen.css" />
 	  </head>
 	  <body>

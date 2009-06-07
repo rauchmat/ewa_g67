@@ -11,7 +11,7 @@
         <meta name="description" content="Loginseite des EWA Poker Portals."/>
 		<meta name="keywords" content="login EWA poker"/>
 		<meta name="language" content="de-AT"/>
-	    <title><i:outputText value="#{msg.app_title}"/></title>
+	    <title><i:outputText value="#{msg.app_title}" nospan="true"/></title>
 	    <link rel="stylesheet" type="text/css" href="./style/screen.css" />
 	  </head>
 	  <body>
@@ -26,7 +26,7 @@
 						<%@ include file="inc/menu.jsp"%>
 					</div>
 					<div id="content">
-						<i:form id="loginForm">
+						<i:form id="loginForm" partialSubmit="true">
 							<h2><i:outputText value="#{msg.login_heading}"/></h2>
 							<i:messages />
 							<i:outputText rendered="#{!loginController.loggedIn}">
@@ -37,7 +37,7 @@
 								<i:inputText value="#{loginController.loginUser}" id="userName" required="true" />
 								
 								<i:outputLabel value="#{msg.login_lbl_pwd}" for="password"/>
-								<i:inputSecret value="#{loginController.loginPassword}" id="password" required="true" />
+								<i:inputSecret value="#{loginController.loginPassword}" id="password" required="true" partialSubmit="false" />
 								
 							</i:panelGrid>
 							<i:commandButton action="#{loginController.login}" value="#{msg.login_btn}"/>

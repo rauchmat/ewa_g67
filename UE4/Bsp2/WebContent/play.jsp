@@ -11,7 +11,7 @@
         <meta name="description" content="Pokertisch des EWA Poker Portals."/>
 		<meta name="keywords" content="tisch EWA poker"/>
 		<meta name="language" content="de-AT"/>
-	    <title><i:outputText value="#{msg.app_title}"/></title>
+	    <title><i:outputText value="#{msg.app_title}" nospan="true"/></title>
 	    <link rel="stylesheet" type="text/css" href="./style/screen.css" />
 	  </head>
 	  <body>
@@ -121,7 +121,9 @@
                                         	<i:outputText rendered="#{newsController.newsAvailable}">
 	                                        	<i:outputText value="#{newsController.dateString}"/>:
 	                                        	<i:outputText value="#{newsController.description}" escape="false" />
-	                                        	[<i:outputLink value="#{newsController.link}">mehr</i:outputLink>]
+	                                        	[<i:outputLink value="#{newsController.link}">
+	                                        		<i:outputText value="#{msg.play_news_more}" />
+                                        		</i:outputLink>]
                                         	</i:outputText>
                                         </li>
                                     </ul>

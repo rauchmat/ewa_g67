@@ -63,10 +63,12 @@ table tbody {
 	color: #FFFFFF;
 }
 
-#infoborder p {
+#infoborder span {
+	color: #FFFFFF;
 	margin: 0px 0px 0px 0px;
 	line-height: 1.5em;
 	padding-right: 0.3em;
+	vertical-align: middle;
 }
 
 #infoborder a {
@@ -186,6 +188,20 @@ table tbody {
     overflow: auto;
 }
 
+#table span {
+	color: #FFFFFF;
+	font-size: 1em;
+}
+
+#table span a, #table span a span {
+	color: orange;
+	text-decoration: none;
+}
+
+#result * {
+	font-style: italic;
+}
+
 #betboxes h2 {
 	display: none;
 }
@@ -220,6 +236,12 @@ table tbody {
 	padding-bottom: 1em;
 	border-left: 2px solid #f29400;
 	color: #FFFFFF;
+}
+
+#content label {
+	color: #FFFFFF;
+	text-align:left;
+	font-size: 80%;
 }
 
 fieldset {
@@ -279,4 +301,8 @@ fieldset {
 #table p {
     color: #ffffff;
     background-color: inherit;
+}
+
+form .iceMsgError {
+	color: #f00;
 }

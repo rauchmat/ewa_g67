@@ -37,7 +37,10 @@ public class NewsPoller extends TimerTask {
 		}
 
 		final Timer poller = new Timer("NewsPoller", true);
-		poller.schedule(this, 0, NewsPoller.POLL_FREQUENCY);
+
+		// delay of POLL_FREQUENCY because initial news are already polled, so it
+		// doesn't get reloaded immediatly
+		poller.schedule(this, NewsPoller.POLL_FREQUENCY, NewsPoller.POLL_FREQUENCY);
 	}
 
 	public NewsItem getLatestNews() {
