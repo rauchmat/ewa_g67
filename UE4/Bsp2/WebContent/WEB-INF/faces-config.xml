@@ -105,12 +105,27 @@
 			#{playerDAO}</value>
 		</managed-property>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>playController</managed-bean-name>
+		<managed-bean-class>at.ac.tuwien.big.ewa.ue3.web.PlayController</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>gameController</property-name>
+			<property-class>at.ac.tuwien.big.ewa.ue3.web.GameController</property-class>
+			<value>#{gameController}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>loginController</property-name>
+			<property-class>at.ac.tuwien.big.ewa.ue3.web.LoginController</property-class>
+			<value>#{loginController}</value>
+		</managed-property>
+	</managed-bean>
 	<navigation-rule>
 		<display-name>newGame</display-name>
 		<navigation-case>
 			<from-action>#{gameController.newGame}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/play.jsp</to-view-id>
+			<to-view-id>/play.iface</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -119,17 +134,17 @@
 		<navigation-case>
 			<from-action>#{gameController.quitGame}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/index.jsp</to-view-id>
+			<to-view-id>/index.iface</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<display-name>login</display-name>
-		<from-view-id>/login.jsp</from-view-id>
+		<from-view-id>/login.iface</from-view-id>
 		<navigation-case>
 			<from-action>#{loginController.login}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/index.jsp</to-view-id>
+			<to-view-id>/index.iface</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -138,17 +153,17 @@
 		<navigation-case>
 			<from-action>#{loginController.logout}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/index.jsp</to-view-id>
+			<to-view-id>/index.iface</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<display-name>register</display-name>
-		<from-view-id>/register.jsp</from-view-id>
+		<from-view-id>/register.iface</from-view-id>
 		<navigation-case>
 			<from-action>#{registerController.register}</from-action>
 			<from-outcome>success</from-outcome>
-			<to-view-id>/index.jsp</to-view-id>
+			<to-view-id>/index.iface</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

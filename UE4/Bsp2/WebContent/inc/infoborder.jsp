@@ -3,12 +3,15 @@
 
 <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
 <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<%@ taglib uri="http://www.icesoft.com/icefaces/component" prefix="i" %>
 
 <div id="infoborder">
-<p><h:outputText rendered="#{!loginController.loggedIn}">
-	<a href="login.html">Einloggen</a> oder <a href="register.html">Registrieren</a>
-</h:outputText> <h:outputText rendered="#{loginController.loggedIn}">
-				Sie sind als <em><h:outputText
-		value="#{loginController.loggedInPlayer.userName}" /></em> eingeloggt.
-				</h:outputText></p>
+<p>
+	<i:outputText rendered="#{!loginController.loggedIn}">
+		<a href="login.iface">Einloggen</a> oder <a href="register.iface">Registrieren</a>
+	</i:outputText>
+	<i:outputText rendered="#{loginController.loggedIn}">
+		Sie sind als <em><i:outputText value="#{loginController.loggedInPlayer.userName}" /></em> eingeloggt.
+	</i:outputText>
+</p>
 </div>

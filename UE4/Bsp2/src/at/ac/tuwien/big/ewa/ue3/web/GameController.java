@@ -334,6 +334,10 @@ public class GameController {
 		return getGame().isOver();
 	}
 
+	public boolean isPlayerCardsAvailable() {
+		return game.getPlayersCards().size() == 0 ? false : true;
+	}
+
 	/**
 	 * Creates a new {@link Game} for the {@link Player} that is currently set and writes the newly created {@link Game}
 	 * to the session.
