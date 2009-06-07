@@ -10,3 +10,4 @@ Servers/*
 abgabe/UE?
 abgabe/*.zip
 UE4/Servers/*
+UE4/*/build/*
