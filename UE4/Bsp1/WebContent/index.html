@@ -1,44 +1,35 @@
-<?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
-<head>
-<title>EWA Poker :: Chat</title>
-<meta http-equiv="Content-Type"
-	content="application/xhtml+xml; charset=utf-8" />
-<meta name="description" content="Chat des EWA Poker Portals." />
-<meta name="keywords" content="chat EWA poker" />
-<meta name="language" content="de-AT" />
-<style type="text/css">
-	fieldset {
-  clear:both;
-  border:0;
-	}
-
-	fieldset label {
-  float:left;
-  width: 9em;
-  clear:both;
-	}
-	
-	fieldset input {
-  width: 15em;
-	}
-</style>
-<script type="text/javascript" src="script.js"/>
-</head>
-<body>
-	<fieldset>
-		<div>
-			<label xml:lang="en" for="username">Username</label> 
-			<input type="text" id="username" name="username" />
-		</div>
-		<div>
-			<label xml:lang="en" for="messagetext">Messagetext</label> 
-			<input id="messagetext" name="messagetext" />
-		</div>
-	</fieldset>
-	<input type="submit" value="Senden" accesskey="s" />
-</body>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+        <script type="text/javascript" src="script.js"></script>
+        <title>EWA Poker Chat</title>           
+    </head>
+    <body>
+        <h2>EWA Poker Chat</h2>
+        
+        <div id="errorMsg"></div>
+        
+        <form id="chatInput" action="javascript:sendMessage()">
+            <p>
+	            <label for="username">Username:</label>
+	            <input id="username" name="username" type="text" alt="input your name" />
+            </p>
+            
+            <p>
+	            <label for="message">Message:</label>
+	            <textarea id="message" name="message" title="input your message" cols="100"></textarea>
+	            <br/>
+            </p>
+            
+            <p>
+            	<button type="submit" name="send" value="send">Send Message</button>
+            </p>
+        </form>
+        
+        <div id="chatOutput"></div>
+        
+        <div id="debugInfo"></div>
+    </body>
 </html>
