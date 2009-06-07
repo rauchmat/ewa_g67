@@ -1,102 +1,94 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-var messagePoller = window.setInterval("this.updateMessages()", 3000);
-var xmlHttp = null;
-var lastId = null;
+var _chatPoller = window.setInterval("updateMessages()", 3000);
+var _xmlHttpReq = null;
+var _revision = null;
 
-
-this.sendRequest = function(method, url, data, callback) {
-    xmlHttp = initXmlHttpObject();
-    timestamp = new Date();
-
-    // add timestamp to url
-    if(url.indexOf('?') > 0) {
-    	url += "&";
-    }
-    else {
-        url += "?";
-    }
-    url += timestamp;
-    
-    if (xmlHttp==null) {
-        alert ("Your browser does not support AJAX!");
-        return;
-    }
-
-    xmlHttp.onreadystatechange = callback;
-
-    xmlHttp.open(method,url,true);
-
-    if (method == "POST") {
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        /*xmlHttp.setRequestHeader("Content-length", data.length);
-        xmlHttp.setRequestHeader("Connection", "close");*/
-    }
-
-    xmlHttp.send(data);
+function createXHR() {
+	try {
+		_xmlHttpReq = new XMLHttpRequest();
+	} catch (microsoft) {
+		try {
+			_xmlHttpReq = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (anotherMicrosoftAproach) {
+			try {
+				_xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (failure) {
+				alert("Error creating XMLHttpRequest.")
+			}
+		}
+	}
+	return _xmlHttpReq;
 }
 
-initXmlHttpObject = function() {
-    try {
-        // Firefox, Opera 8.0+, Safari
-        var _xmlHttp=new XMLHttpRequest();
-    }
-    catch (e) {
-        // Internet Explorer
-        try {
-            _xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            _xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-    }
-    return _xmlHttp;
+function renderMessage() {
+	if (_xmlHttpReq.readyState == 4) {
+		if (_xmlHttpReq.status == 200) {
+		var xmlDoc = _xmlHttpReq.responseXML.documentElement;
+		var messages = xmlDoc.getElementsByTagName('message').length;
+
+		for ( var i = 0; i < messages; i++) {
+			document.getElementById("chatHistory").innerHTML = "<p>"
+					+ xmlDoc.getElementsByTagName('message')[i]
+					        .getElementsByTagName("username")[0].firstChild.nodeValue
+					+ ": "
+					+ xmlDoc.getElementsByTagName('message')[i]
+							.getElementsByTagName("text")[0].firstChild.nodeValue
+					+ "<p/>" + document.getElementById("chatHistory").innerHTML;
+		}
+
+		_revision = xmlDoc.getElementsByTagName("revision")[0].firstChild.nodeValue;
+		}
+		else {
+			alert("Error polling messages (Status code " + _xmlHttpReq.status +").");
+		}
+	}
+	
 }
 
-renderMessage = function () {
-    if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        var xmlDoc = xmlHttp.responseXML.documentElement;
-        var messages = xmlDoc.getElementsByTagName('message').length;
+function sendMessage() {
+	var username = document.getElementById("username");
+	var message = document.getElementById("messagetext");
 
-        // render chat messages
-        for (var i=0; i < messages; i++) {
-            document.getElementById("chatOutput").innerHTML = "[" +
-                xmlDoc.getElementsByTagName('message')[i].getElementsByTagName("time")[0].firstChild.nodeValue + "] \"" +
-                xmlDoc.getElementsByTagName('message')[i].getElementsByTagName("username")[0].firstChild.nodeValue + "\": " +
-                xmlDoc.getElementsByTagName('message')[i].getElementsByTagName("text")[0].firstChild.nodeValue +
-                "<br/>" +
-                document.getElementById("chatOutput").innerHTML;
-        }
-
-        // update lastId
-        lastId = xmlDoc.getElementsByTagName("lastId")[0].firstChild.nodeValue;
-
-        // render debug infos
-        document.getElementById("debugInfo").innerHTML = "lastId=" + lastId;
-    }
+	if (username != null && message != null
+		&& username.value != "" && message.value != "") {
+		var data = "username=" + username.value + "&messagetext=" + message.value;
+		
+		if (!_xmlHttpReq)
+			_xmlHttpReq = createXHR();
+		
+		if (_xmlHttpReq) {
+			_xmlHttpReq.onreadystatechange = stateChanged;
+			_xmlHttpReq.open("POST", "./Chat", true);
+			_xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			_xmlHttpReq.send(data);
+		}
+	
+		document.getElementById("message").value = "";
+	}
 }
 
-doNothing = function () { }
-
-this.sendMessage = function() {
-    var username = document.getElementById("username").value;
-    var message = document.getElementById("message").value;
-
-    if (username != "" && message != "") {
-        var url = "./Chat";
-        var data = "username="+username+"&message="+message;
-        document.getElementById("errorMsg").innerHTML = data;
-        this.sendRequest("POST", url, data, doNothing);
-        document.getElementById("message").value = "";
-    }
-    else {
-        document.getElementById("errorMsg").innerHTML = "Username and Message must not be empty.";
-    }
+function stateChanged() { 
+	switch(_xmlHttpReq.readyState) { 
+	case 0: break; // uninitialized
+	case 1: break; // open
+	case 2: break; // sent
+	case 3: break; // receiving
+	case 4:        //loaded 
+		if(_xmlHttpReq.status != 200) { 
+			alert("Error sending XmlHttpRequest (Status Code = " + request.status + ").");
+		} 
+		break;                      
+	} 
 }
 
-this.updateMessages = function() {
-    var url = "./Chat?notify=true&lastId="+lastId;
-    this.sendRequest("GET", url, null, renderMessage);
+
+function updateMessages() {
+	if (!_xmlHttpReq)
+		_xmlHttpReq = createXHR();
+	
+	if (_xmlHttpReq) {
+		var url = "./Chat?revision=" + _revision;
+		_xmlHttpReq.onreadystatechange = renderMessage;
+		_xmlHttpReq.open("GET", url, true);
+		_xmlHttpReq.send(null);
+	}
 }

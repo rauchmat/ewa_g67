@@ -2,86 +2,76 @@ package at.ac.tuwien.big.ewa.ue4.bsp1.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import at.ac.tuwien.big.ewa.ue4.bsp1.domain.Chat;
+import at.ac.tuwien.big.ewa.ue4.bsp1.domain.Message;
+
 public class ChatController extends HttpServlet {
 
 	private static final long serialVersionUID = 7830604605299588034L;
 
-	@Override
-	public void init() throws ServletException {
-		super.init();
-
-		final Vector<Message> messages = new Vector<Message>();
-		getServletContext().setAttribute("messages", messages);
+	private void ensureChat() {
+		if (getServletContext().getAttribute("chat") == null) {
+			Chat chat = new Chat();
+			getServletContext().setAttribute("chat", chat);
+		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private Vector<Message> getMessages() {
-		return (Vector<Message>) getServletContext().getAttribute("messages");
+	private Chat getChat() {
+		ensureChat();
+		return (Chat) getServletContext().getAttribute("chat");
+
+	}
+
+	private void setChat(Chat chat) {
+		ensureChat();
+		getServletContext().setAttribute("chat", chat);
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/xml;charset=UTF-8");
-		final PrintWriter out = response.getWriter();
-
-		final Vector<Message> messages = getMessages();
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		final Chat chat = getChat();
+		
+		resp.setContentType("text/xml;charset=UTF-8");
+		final PrintWriter out = resp.getWriter();
 
 		try {
 			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			out.print("<chat>");
-
-			if (request.getParameter("notify") != null) {
-
-				int lastId = 0;
-				if (request.getParameter("lastId") != null) try {
-					lastId = Integer.parseInt(request.getParameter("lastId"));
+			int revision = 0;
+			if (req.getParameter("revision") != null) {
+				try {
+					revision = Integer.parseInt(req.getParameter("revision"));
 				} catch (final NumberFormatException e) {
 				}
-
-				for (int i = lastId; i < messages.size(); i++)
-					out.println(messages.get(i).getOutputMessage());
-
-				out.print("<lastId>" + messages.size() + "</lastId>");
 			}
-			out.print("</chat>");
+			
+			out.println(chat.serialize(revision));
 		} finally {
 			out.close();
 		}
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-	        IOException {
-		response.setContentType("text/xml;charset=UTF-8");
-		final PrintWriter out = response.getWriter();
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException {
+		final Chat chat = getChat();
+		
+		if (req.getParameter("username") != null
+				&& req.getParameter("messagetext") != null) {
 
-		final Vector<Message> messages = getMessages();
+			// new message
+			final String userName = req.getParameter("username").toString();
+			final String message = req.getParameter("messagetext").toString();
 
-		try {
-			out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			out.print("<chat>");
-			if (request.getParameter("username") != null && request.getParameter("message") != null) {
+			chat.add(new Message(userName, message));
 
-				// new message
-				final String userName = request.getParameter("username").toString();
-				final String message = request.getParameter("message").toString();
-
-				messages.addElement(new Message(userName, message));
-
-				getServletContext().setAttribute("messages", messages);
-
-				out.print("Message OK");
-			}
-			out.print("</chat>");
-		} finally {
-			out.close();
+			setChat(chat);
 		}
 	}
 }
