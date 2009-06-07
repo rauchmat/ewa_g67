@@ -8,9 +8,9 @@
 package at.ac.tuwien.big.ewa.news;
 
 public interface NewsService extends javax.xml.rpc.Service {
-    public java.lang.String getNewsPortAddress();
+	public at.ac.tuwien.big.ewa.news.News getNewsPort() throws javax.xml.rpc.ServiceException;
 
-    public at.ac.tuwien.big.ewa.news.News getNewsPort() throws javax.xml.rpc.ServiceException;
+	public at.ac.tuwien.big.ewa.news.News getNewsPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
 
-    public at.ac.tuwien.big.ewa.news.News getNewsPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+	public java.lang.String getNewsPortAddress();
 }

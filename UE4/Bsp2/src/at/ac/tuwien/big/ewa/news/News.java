@@ -8,5 +8,5 @@
 package at.ac.tuwien.big.ewa.news;
 
 public interface News extends java.rmi.Remote {
-    public at.ac.tuwien.big.ewa.news.NewsItem getLatestNews() throws java.rmi.RemoteException;
+	public at.ac.tuwien.big.ewa.news.NewsItem getLatestNews() throws java.rmi.RemoteException;
 }
