@@ -34,8 +34,8 @@ cp -Rf ../UE${BSP}/Bsp2/src/* ./UE${BSP}/Bsp2/src/ > /dev/null
 cp -Rf ../UE${BSP}/Bsp2/WebContent/* ./UE${BSP}/Bsp2/WebContent/ > /dev/null
 
 echo "Removing libraries in source directory ..."
-rm -Rf ../UE${BSP}/Bsp1/WebContent/WEB-INF/lib
-rm -Rf ../UE${BSP}/Bsp2/WebContent/WEB-INF/lib
+rm -Rf ./UE${BSP}/Bsp1/WebContent/WEB-INF/lib
+rm -Rf ./UE${BSP}/Bsp2/WebContent/WEB-INF/lib
 
 echo "Creating ZIP ..."
 zip -r -9 "${FILENAME}.zip" UE${BSP}/* -x "*.DS_Store" > /dev/null
