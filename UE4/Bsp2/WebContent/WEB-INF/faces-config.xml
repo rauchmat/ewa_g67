@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+	<managed-bean>
+		<description>The currently logged in player.</description>
+		<managed-bean-name>player</managed-bean-name>
+		<managed-bean-class>
+			at.ac.tuwien.big.easyholdem.player.Player
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<description>The currently active game.</description>
+		<managed-bean-name>game</managed-bean-name>
+		<managed-bean-class>
+			at.ac.tuwien.big.easyholdem.game.Game
+		</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<description>
+			The application widely used player dao.
+		</description>
+		<managed-bean-name>playerDAO</managed-bean-name>
+		<managed-bean-class>
+			at.ac.tuwien.big.easyholdem.player.DerbyPlayerDAO
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<description>Controls login requests.</description>
+		<managed-bean-name>loginController</managed-bean-name>
+		<managed-bean-class>
+			at.ac.tuwien.big.ewa.ue3.web.LoginController
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>playerDAO</property-name>
+			<property-class>
+				at.ac.tuwien.big.easyholdem.player.PlayerDAO
+			</property-class>
+			<value>#{playerDAO}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>loggedInPlayer</property-name>
+			<property-class>
+				at.ac.tuwien.big.easyholdem.player.Player
+			</property-class>
+			<value>#{player}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<description>Controls all register requests.</description>
+		<managed-bean-name>registerController</managed-bean-name>
+		<managed-bean-class>
+			at.ac.tuwien.big.ewa.ue3.web.RegisterController
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>playerDAO</property-name>
+			<property-class>
+				at.ac.tuwien.big.easyholdem.player.PlayerDAO
+			</property-class>
+			<value>#{playerDAO}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>loggedInPlayer</property-name>
+			<property-class>
+				at.ac.tuwien.big.easyholdem.player.Player
+			</property-class>
+			<value>#{player}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<description>Controls game requests.</description>
+		<managed-bean-name>gameController</managed-bean-name>
+		<managed-bean-class>
+			at.ac.tuwien.big.ewa.ue3.web.GameController
+		</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>game</property-name>
+			<property-class>
+				at.ac.tuwien.big.easyholdem.game.Game
+			</property-class>
+			<value>#{game}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>
+			loggedInPlayer</property-name>
+			<property-class>
+			at.ac.tuwien.big.easyholdem.player.Player</property-class>
+			<value>
+			#{player}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>
+			playerDAO</property-name>
+			<property-class>
+			at.ac.tuwien.big.easyholdem.player.PlayerDAO</property-class>
+			<value>
+			#{playerDAO}</value>
+		</managed-property>
+	</managed-bean>
+	<navigation-rule>
+		<display-name>newGame</display-name>
+		<navigation-case>
+			<from-action>#{gameController.newGame}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/play.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+    <navigation-rule>
+		<display-name>quitGame</display-name>
+		<navigation-case>
+			<from-action>#{gameController.quitGame}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login</display-name>
+		<from-view-id>/login.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{loginController.login}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>logout</display-name>
+		<navigation-case>
+			<from-action>#{loginController.logout}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>register</display-name>
+		<from-view-id>/register.jsp</from-view-id>
+		<navigation-case>
+			<from-action>#{registerController.register}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
