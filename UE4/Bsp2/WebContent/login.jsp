@@ -34,10 +34,10 @@
 							<i:panelGrid columns="2">
 							
 								<i:outputLabel value="#{msg.login_lbl_username}" for="userName"/>
-								<i:inputText value="#{loginController.loginUser}" id="userName" required="true" />
+								<i:inputText value="#{loginController.loginUser}" id="userName" required="true"  action="#{loginController.login}" />
 								
 								<i:outputLabel value="#{msg.login_lbl_pwd}" for="password"/>
-								<i:inputSecret value="#{loginController.loginPassword}" id="password" required="true" partialSubmit="false" />
+								<i:inputSecret value="#{loginController.loginPassword}" id="password" required="true" partialSubmit="false" action="#{loginController.login}" />
 								
 							</i:panelGrid>
 							<i:commandButton action="#{loginController.login}" value="#{msg.login_btn}"/>

@@ -34,45 +34,52 @@
 							<i:panelGrid columns="3">
 
 								<i:outputLabel value="#{msg.register_lbl_firstname}" for="firstName"/>
-								<i:inputText value="#{registerController.regPlayer.firstName}" id="firstName" required="true"/>
+								<i:inputText value="#{registerController.regPlayer.firstName}" id="firstName"
+									required="true" action="#{registerController.register}"/>
 								<i:message for="firstName"/>
 								
 								<i:outputLabel value="#{msg.register_lbl_lastname}" for="lastName"/>
-								<i:inputText value="#{registerController.regPlayer.lastName}" id="lastName" required="true"/>
+								<i:inputText value="#{registerController.regPlayer.lastName}" id="lastName"
+									required="true" action="#{registerController.register}"/>
 								<i:message for="lastName"/>
 								
 								<i:outputLabel value="#{msg.register_lbl_gender}" for="gender"/>
 								<i:selectOneMenu value="#{registerController.regGender}" id ="gender" required="true">
-									<f:selectItem itemLabel="#{msg.register_male}" itemValue="m"/>
-									<f:selectItem itemLabel="#{msg.register_female}" itemValue="w"/>
+									<f:selectItem itemLabel="#{msg.register_male}" itemValue="m" />
+									<f:selectItem itemLabel="#{msg.register_female}" itemValue="w" />
 								</i:selectOneMenu>
 								<i:message for="gender"/>
 								
 								<i:outputLabel value="#{msg.register_lbl_dateOfBirth}" for="dateOfBirth" />
-								<i:selectInputDate id="dateOfBirth" value="#{registerController.regPlayer.dateOfBirth}" renderAsPopup="true"
-									renderMonthAsDropdown="true" renderYearAsDropdown="true" popupDateFormat="dd.MM.yyyy"
-									title="#{msg.register_lbl_dateOfBirth}" required="true">
+								<i:selectInputDate id="dateOfBirth" value="#{registerController.regPlayer.dateOfBirth}"
+									renderAsPopup="true" renderMonthAsDropdown="true" renderYearAsDropdown="true"
+									popupDateFormat="dd.MM.yyyy" title="#{msg.register_lbl_dateOfBirth}" required="true"
+									action="#{registerController.register}">
 									<f:convertDateTime pattern="dd.MM.yyyy" />
 								</i:selectInputDate>
 							  	<i:message for="dateOfBirth" />
 							  	
 							  	<i:outputLabel value="#{msg.register_lbl_stack}" for="stack"/>
-								<i:inputText value="#{registerController.regPlayer.stack}" id ="stack" required="true">
+								<i:inputText value="#{registerController.regPlayer.stack}" id ="stack" required="true"
+									action="#{registerController.register}">
 									<f:validateLongRange minimum="100" maximum="10000"/>
 								</i:inputText>
 								<i:message for="stack"/>
 								
 								<i:outputLabel value="#{msg.register_lbl_username}" for="userName"/>
-								<i:inputText value="#{registerController.regPlayer.userName}" id="userName" required="true" validator="#{registerController.validateUsername}">
+								<i:inputText value="#{registerController.regPlayer.userName}" id="userName"
+									required="true" validator="#{registerController.validateUsername}"
+									action="#{registerController.register}">
 									<f:validateLength minimum="6"/>
 								</i:inputText>
 								<i:message for="userName" />
 								
 								<i:outputLabel value="#{msg.register_lbl_pwd}" for="password"/>
-								<i:inputSecret value="#{registerController.regPlayer.password}" id="password" required="true">
+								<i:inputSecret value="#{registerController.regPlayer.password}" id="password"
+									required="true" action="#{registerController.register}" >
 									<f:validateLength minimum="6"/>
 								</i:inputSecret>
-								<i:message for="password" showDetail="false"/>
+								<i:message for="password" />
 								
 							</i:panelGrid>
 							<i:commandButton action="#{registerController.register}" value="#{msg.register_btn}"/>

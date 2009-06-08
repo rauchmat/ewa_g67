@@ -35,7 +35,8 @@
 							<i:panelGrid columns="3">
 							  	
 							  	<i:outputLabel value="#{msg.chg_user_lbl_stack}" for="stack"/>
-								<i:inputText value="#{registerController.loggedInPlayer.stack}" id ="stack" required="true">
+								<i:inputText value="#{registerController.loggedInPlayer.stack}" id ="stack"
+									required="true" action="#{registerController.changeUser}">
 									<f:validateLongRange minimum="100" maximum="10000"/>
 								</i:inputText>
 								<i:commandButton action="#{registerController.changeUser}" value="#{msg.change_stack_btn}"/>
@@ -49,7 +50,8 @@
 							<i:panelGrid columns="3">
 								
 								<i:outputLabel value="#{msg.chg_user_lbl_pwd}" for="password"/>
-								<i:inputSecret value="#{registerController.loggedInPlayer.password}" id="password" required="true">
+								<i:inputSecret value="#{registerController.loggedInPlayer.password}" id="password"
+									required="true" action="#{registerController.changeUser}">
 									<f:validateLength minimum="6"/>
 								</i:inputSecret>
 								<i:commandButton action="#{registerController.changeUser}" value="#{msg.change_pwd_btn}"/>
