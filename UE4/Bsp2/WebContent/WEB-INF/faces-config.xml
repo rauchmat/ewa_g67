@@ -3,9 +3,6 @@
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
 	version="1.2">
-	<!-- application>
-		<view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
-	</application-->
 	<managed-bean>
 		<managed-bean-name>renderer</managed-bean-name>
 		<managed-bean-class>com.icesoft.faces.async.render.OnDemandRenderer</managed-bean-class>
@@ -146,7 +143,7 @@
 	</navigation-rule>
 	<navigation-rule>
 		<display-name>login</display-name>
-		<from-view-id>/login.iface</from-view-id>
+		<from-view-id>/login.jsp</from-view-id>
 		<navigation-case>
 			<from-action>#{loginController.login}</from-action>
 			<from-outcome>success</from-outcome>
@@ -165,7 +162,7 @@
 	</navigation-rule>
 	<navigation-rule>
 		<display-name>register</display-name>
-		<from-view-id>/register.iface</from-view-id>
+		<from-view-id>/register.jsp</from-view-id>
 		<navigation-case>
 			<from-action>#{registerController.register}</from-action>
 			<from-outcome>success</from-outcome>
