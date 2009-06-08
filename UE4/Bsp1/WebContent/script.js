@@ -32,7 +32,7 @@ function renderMessage() {
 					+ ": "
 					+ xmlDoc.getElementsByTagName('message')[i]
 							.getElementsByTagName("text")[0].firstChild.nodeValue
-					+ "<p/>" + document.getElementById("chatHistory").innerHTML;
+					+ "</p>" + document.getElementById("chatHistory").innerHTML;
 		}
 
 		_revision = xmlDoc.getElementsByTagName("revision")[0].firstChild.nodeValue;
