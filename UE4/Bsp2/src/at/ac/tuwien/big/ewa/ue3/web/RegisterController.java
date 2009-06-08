@@ -1,5 +1,7 @@
 package at.ac.tuwien.big.ewa.ue3.web;
 
+import java.util.Calendar;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -54,6 +56,14 @@ public class RegisterController {
 	 * {@link Player} to register.
 	 */
 	private Player regPlayer = new Player();
+
+	public RegisterController() {
+		final Calendar c = Calendar.getInstance();
+		c.add(Calendar.YEAR, -18);
+		// default to a minimum age of 18 years
+
+		regPlayer.setDateOfBirth(c.getTime());
+	}
 
 	/***************************************************************************
 	 * Managed property methods
